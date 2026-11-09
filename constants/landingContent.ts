@@ -132,13 +132,6 @@ export const WHY_POINTS = [
   "Easily integrates with Oracle OPERA and any PMS",
 ];
 
-export const ADVANTAGE = [
-  { title: "Opportunity", body: "Transforming cost-heavy valet centers into efficient, data-rich service hubs." },
-  { title: "Revenue Model", body: "SaaS-based subscription tiers tailored to property volume and size." },
-  { title: "Go-to-Market", body: "Focused on boutique and 5-star hotel clusters globally." },
-  { title: "Unit Economics", body: "Low implementation cost with immediate ROI through reduced liability claims." },
-];
-
 export const PLANS = [
   {
     id: "starter",

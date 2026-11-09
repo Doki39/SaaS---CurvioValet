@@ -11,7 +11,6 @@ import { Image } from "expo-image";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import {
-  ADVANTAGE,
   APP_URL,
   AUDIENCES,
   BRAND,
@@ -26,7 +25,7 @@ import {
   TAGLINE,
   WHY_POINTS,
 } from "@/constants/landingContent";
-import { getHeroImageSource, HERO_DISPLAY_MAX_WIDTH_PX } from "@/constants/heroImage";
+import { getHeroImageSource } from "@/constants/heroImage";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { GoldButton } from "@/components/ui/GoldButton";
 import { OutlineButton } from "@/components/ui/OutlineButton";
@@ -78,38 +77,39 @@ export function LandingPage() {
       </View>
 
       <ScrollView className="flex-1" contentContainerClassName="pb-stack-lg" showsVerticalScrollIndicator={false}>
-        <View className="pt-28">
-          <View className="items-center px-margin-mobile py-stack-lg text-center">
-            <Text className="mb-stack-md border-b border-gold-light pb-1 font-bodySemi text-xs uppercase tracking-widest text-gold-light">
-              {HERO.eyebrow}
-            </Text>
-            <Text className="mb-stack-md text-center font-display text-4xl leading-tight text-primary">
-              {HERO.title}
-            </Text>
-            <Text className="mb-stack-lg max-w-xl text-center font-body text-lg leading-7 text-secondary">
-              {HERO.subtitle}
-            </Text>
-            <View className={`mb-stack-lg w-full gap-stack-md ${isWide ? "max-w-md flex-row" : ""}`}>
-              <View className={isWide ? "flex-1" : "w-full"}>
-                <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={openDemo} />
-              </View>
-              <View className={isWide ? "flex-1" : "w-full"}>
-                <OutlineButton label="View Pricing" onPress={scrollToPricing} />
-              </View>
-            </View>
+        <View>
+          <View className="relative w-full overflow-hidden">
+            <Image
+              source={getHeroImageSource()}
+              className="absolute inset-0 h-full w-full"
+              contentFit="cover"
+              contentPosition="center"
+              priority="high"
+              cachePolicy="memory-disk"
+            />
+            <View className="absolute inset-0 bg-surface/80" />
             <View
-              className="relative mx-auto aspect-[4/3] w-full overflow-hidden rounded-xl bg-primary-container shadow-2xl"
-              style={{ maxWidth: HERO_DISPLAY_MAX_WIDTH_PX }}
+              className={`relative z-10 items-center px-margin-mobile pb-section-gap pt-28 text-center ${
+                isWide ? "min-h-[560px] justify-center" : "min-h-[480px] justify-center"
+              }`}
             >
-              <Image
-                source={getHeroImageSource()}
-                className="h-full w-full"
-                contentFit="cover"
-                contentPosition="center"
-                priority="high"
-                allowDownscaling={false}
-                cachePolicy="memory-disk"
-              />
+              <Text className="mb-stack-md border-b border-gold-light pb-1 font-bodySemi text-xs uppercase tracking-widest text-gold-light">
+                {HERO.eyebrow}
+              </Text>
+              <Text className="mb-stack-md text-center font-display text-4xl leading-tight text-primary">
+                {HERO.title}
+              </Text>
+              <Text className="mb-stack-lg max-w-xl text-center font-body text-lg leading-7 text-secondary">
+                {HERO.subtitle}
+              </Text>
+              <View className={`w-full gap-stack-md ${isWide ? "max-w-md flex-row" : ""}`}>
+                <View className={isWide ? "flex-1" : "w-full"}>
+                  <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={openDemo} />
+                </View>
+                <View className={isWide ? "flex-1" : "w-full"}>
+                  <OutlineButton label="View Pricing" onPress={scrollToPricing} />
+                </View>
+              </View>
             </View>
           </View>
 
@@ -214,19 +214,6 @@ export function LandingPage() {
                 <View key={line} className="flex-row items-center gap-3">
                   <MaterialIcons name="check-circle" size={22} color="#D4AF37" />
                   <Text className="font-body text-base text-white-pure">{line}</Text>
-                </View>
-              ))}
-            </View>
-          </View>
-
-          <View className="px-margin-mobile py-section-gap">
-            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-primary">Digital Advantage</Text>
-            <View className="ml-4 space-y-stack-lg border-l-2 border-outline-variant/30 pl-8">
-              {ADVANTAGE.map((item) => (
-                <View key={item.title} className="relative mb-stack-lg">
-                  <View className="absolute -left-[41px] top-1 h-4 w-4 rounded-full bg-gold-light" />
-                  <Text className="font-bodySemi text-base text-primary">{item.title}</Text>
-                  <Text className="font-body text-sm text-secondary">{item.body}</Text>
                 </View>
               ))}
             </View>
