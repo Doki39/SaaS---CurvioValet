@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "CurvioValet",
+    "slug": "curviovalet-marketing",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "curviovalet",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/curviovalet-logo.jpg",
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/curviovalet-logo.jpg"
+    },
+    "plugins": ["expo-router"]
+  }
+}
