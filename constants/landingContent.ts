@@ -18,8 +18,9 @@ export const PROBLEMS = [
   },
   {
     icon: "format-paint" as const,
-    title: "Visual Pollution",
-    body: "Ugly parking markings on premium hotel surroundings like chalk numbers, paint, or cones diminish luxury appeal.",
+    title: "Curb Appeal",
+    body:
+      "Chalk numbers, painted slots, and traffic cones on the arrival drive clash with a five-star setting and guests notice before they reach the door.",
   },
   {
     icon: "photo-camera" as const,
@@ -28,18 +29,73 @@ export const PROBLEMS = [
   },
 ];
 
+export const PROBLEMS_VIDEO = {
+  enabled: false,
+  src: "/videos/beyond-manual-log.mp4",
+  poster: "/images/problems-video-poster.jpg",
+  ariaLabel: "Why hotels move beyond paper valet logs",
+  disclaimer:
+    "Video captured from the CurvioValet app, demonstrating real-time efficiency and check-in speed.",
+};
+
+export const PROBLEMS_VIDEO_DRAFT = {
+  workingTitle: "Beyond the manual log",
+  length: "1:45–2:05",
+  format: "16:9, muted optional, captions recommended",
+  fileDrop:
+    "Save your export as public/videos/beyond-manual-log.mp4, then set PROBLEMS_VIDEO.enabled to true.",
+  scenes: [
+    {
+      time: "0:00–0:10",
+      title: "Hook",
+      script:
+        "Friday peak. Cars stack at the entrance. A key is missing. Guests wait under the portico while your team flips through a paper log.",
+      shot: "Wide arrival, cut to valet desk: clipboard, key tags, queue at door.",
+    },
+    {
+      time: "0:10–0:36",
+      title: "Analog Chaos",
+      script:
+        "Every handoff means handwriting, cross-checking tags, and walking the board. Paper doesn’t scale when fifty keys are in play—one gap and the whole lane stalls.",
+      shot: "Handwriting on log, hook board search, team radio; hold on waiting guests.",
+    },
+    {
+      time: "0:36–1:02",
+      title: "Visual Pollution",
+      script:
+        "Chalk numbers, painted slots, and traffic cones read as temporary fixes—not luxury. They clash with marble, lighting, and landscaping guests paid for.",
+      shot: "Pristine facade vs chalk / cones; slow pan along drive.",
+    },
+    {
+      time: "1:02–1:24",
+      title: "Liability Blindspots",
+      script:
+        "Without time-stamped photos at intake, damage disputes come down to recall. That’s exposure for the hotel, the valet partner, and the guest relationship.",
+      shot: "Unmarked scratch close-up; contrast phone capture with timestamp overlay.",
+    },
+    {
+      time: "1:24–1:44",
+      title: "Close",
+      script:
+        "Move beyond the manual log. CurvioValet puts AI check-in, digital keys, and condition photos in one flow—clean curb appeal, accountable operations.",
+      shot: "Product montage or app UI; end card: logo, Request a demo, curviovalet.com.",
+    },
+  ],
+};
+
 export const STEPS = [
   {
     n: "1",
     title: "Snap",
-    body: "Valet takes a quick photo of the license plate and vehicle condition. AI extracts details instantly.",
+    body:
+      "Staff capture the vehicle and key. AI extracts the details on the spot, so every intake is fully documented from the first handoff.",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuCE7SrrF4Zrbzgy7s7kWJpPslaETdrS80Ja8G9okIxV5zha1CvhfZIHt0PDYSBZsegIYF0MAWziOz2qJZ-ovKFx_nze7Lc1MMut4-ayxc8uulgCySyxHfYW0IZOZ5qfrucoqVeDHRnPw-RJkb-bPKW3pRvQJyPQ2ngLPBvcEnk3BsGH4PBTeNlnr1ogY1ADEWUYawtlhG-mqcMBubRsVrTC_evaHQ8NnmG8AEJs0beoXe-Ew7yJviWSx-3NVvG4rgEzo036fgMfTc0",
   },
   {
     n: "2",
     title: "Verify",
-    body: "Link the vehicle to the guest profile and key locker position without physical floor markings.",
+    body: "Link the vehicle to the guest profile and key locker position without any extra steps.",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuA0xF9DMvqU3AGGaQpM5tvpg4Rj8GXdJcDVKTRnxHySdAmAMIkQb3PzWo3jj7w57i_Hz0GMTrZfmElZOLdFsN38nP4s9ahEgmBy8mIf6H6inBtkEofQJ6EcPaNvl8dfOJ2K3tfcbU-6240gqA94CS2Ox9JEScp8O4taIuQaCrIv0PQrQs8pk8xA7SDWO07CsQX6yQoDUz6NPOEISB8NYN7ZLi9s9eD3MVEFI3zReNCEdCn8-J7y_9869mFtw6gQmwMTGSc543JmtTI",
   },

@@ -36,6 +36,7 @@ import { GoldButton } from "@/components/ui/GoldButton";
 import { OutlineButton } from "@/components/ui/OutlineButton";
 import { PlanPrice } from "@/components/ui/PlanPrice";
 import { FaqItem } from "@/components/landing/FaqItem";
+import { ProblemsVideo } from "@/components/landing/ProblemsVideo";
 
 const FEATURE_ICON: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   "photo-camera": "photo-camera",
@@ -131,19 +132,46 @@ export function LandingPage() {
           </View>
 
           <View className="bg-primary-container px-margin-mobile py-section-gap">
-            <Text className="mb-stack-lg border-l-4 border-gold-light pl-4 font-displaySemi text-2xl text-white-pure">
-              Beyond the Manual Log
-            </Text>
-            <View className="gap-stack-lg">
-              {PROBLEMS.map((item) => (
-                <View key={item.title} className="flex-row items-start gap-4">
-                  <MaterialIcons name="warning" size={24} color="#ba1a1a" />
-                  <View className="flex-1">
-                    <Text className="mb-1 font-bodySemi text-base text-white-pure">{item.title}</Text>
-                    <Text className="font-body text-sm leading-5 text-on-primary-container">{item.body}</Text>
-                  </View>
+            <View
+              className={`mx-auto w-full max-w-layout-shell gap-gutter ${
+                isWide ? "flex-row items-start" : ""
+              }`}
+            >
+              <View className="min-w-0 flex-1">
+                <Text className="mb-stack-lg font-displaySemi text-2xl text-white-pure">
+                  Beyond the Manual Log
+                </Text>
+                <View className="gap-stack-lg">
+                  {PROBLEMS.map((item) => (
+                    <View key={item.title} className="flex-row items-start gap-4">
+                      <MaterialIcons name="warning" size={24} color="#ba1a1a" />
+                      <View className="min-w-0 flex-1">
+                        <Text className="mb-1 font-bodySemi text-base text-white-pure">{item.title}</Text>
+                        <Text className="font-body text-sm leading-5 text-on-primary-container">{item.body}</Text>
+                      </View>
+                    </View>
+                  ))}
                 </View>
-              ))}
+                <Text className="mb-stack-md mt-stack-lg font-displaySemi text-xl text-white-pure">
+                  Seamless Arrival Flow
+                </Text>
+                <View className="gap-stack-md">
+                  {STEPS.map((step) => (
+                    <View key={step.n} className="flex-row items-start gap-4">
+                      <View className="h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-light">
+                        <Text className="font-bodySemi text-sm text-primary-container">{step.n}</Text>
+                      </View>
+                      <View className="min-w-0 flex-1">
+                        <Text className="mb-1 font-bodySemi text-base text-white-pure">{step.title}</Text>
+                        <Text className="font-body text-sm leading-5 text-on-primary-container">{step.body}</Text>
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              </View>
+              <View className={isWide ? "w-[48%] shrink-0" : "mt-gutter w-full"}>
+                <ProblemsVideo />
+              </View>
             </View>
           </View>
 
@@ -161,30 +189,6 @@ export function LandingPage() {
                 <Text className="font-bodySemi text-primary not-italic">Clean aesthetics outside. Complete clarity inside.</Text>
                 &quot;
               </Text>
-            </View>
-          </View>
-
-          <View className="px-margin-mobile py-section-gap">
-            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-primary">
-              Seamless Arrival Flow
-            </Text>
-            <View className={`gap-section-gap ${isWide ? "flex-row flex-wrap justify-center" : ""}`}>
-              {STEPS.map((step) => (
-                <View key={step.n} className={`items-center ${isWide ? "w-[280px]" : "w-full"}`}>
-                  <View className="mb-4 h-12 w-12 items-center justify-center rounded-full bg-gold-light">
-                    <Text className="font-bodySemi text-base text-primary-container">{step.n}</Text>
-                  </View>
-                  <Text className="mb-2 font-displaySemi text-2xl text-primary">{step.title}</Text>
-                  <Text className="mb-6 text-center font-body text-base text-secondary">{step.body}</Text>
-                  <View className="h-[480px] w-[240px] overflow-hidden rounded-[2rem] border-[6px] border-slate-muted bg-primary-container p-2 shadow-xl">
-                    <Image
-                      source={{ uri: step.image }}
-                      className="h-full w-full rounded-[1.5rem]"
-                      contentFit="cover"
-                    />
-                  </View>
-                </View>
-              ))}
             </View>
           </View>
 
