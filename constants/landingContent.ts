@@ -25,7 +25,8 @@ export const PROBLEMS = [
   {
     icon: "photo-camera" as const,
     title: "Liability Blindspots",
-    body: "Without immediate photo evidence of existing damage, your hotel remains exposed to costly false claims.",
+    body:
+      "Without time-stamped photos when your team takes custody of the vehicle, you have little proof of condition at intake leaving the property exposed to disputes over damage that may have occurred before parking.",
   },
 ];
 
