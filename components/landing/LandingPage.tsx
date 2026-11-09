@@ -26,7 +26,12 @@ import {
   WHY_POINTS,
 } from "@/constants/landingContent";
 import { getHeroImageSource } from "@/constants/heroImage";
-import { BrandMark } from "@/components/ui/BrandMark";
+import {
+  BrandMark,
+  HEADER_BAR_HEIGHT,
+  HEADER_BAR_PADDING_Y,
+  HEADER_BRAND_HEIGHT,
+} from "@/components/ui/BrandMark";
 import { GoldButton } from "@/components/ui/GoldButton";
 import { OutlineButton } from "@/components/ui/OutlineButton";
 import { PlanPrice } from "@/components/ui/PlanPrice";
@@ -64,14 +69,25 @@ export function LandingPage() {
   return (
     <View className="flex-1 bg-surface">
       <StatusBar style="dark" />
-      <View className="absolute top-0 z-50 w-full border-b border-outline-variant/30 bg-surface/90">
-        <View className="mx-auto w-full max-w-layout-shell flex-row items-center justify-between px-margin-mobile py-3">
+      <View
+        className="absolute top-0 z-50 w-full border-b border-outline-variant/30 bg-surface/90"
+        style={{
+          paddingTop: HEADER_BAR_PADDING_Y,
+          paddingBottom: HEADER_BAR_PADDING_Y,
+        }}
+      >
+        <View
+          className="mx-auto w-full max-w-layout-shell flex-row items-center justify-between px-margin-mobile"
+          style={{ height: HEADER_BRAND_HEIGHT }}
+        >
           <BrandMark align="start" size="header" />
           <Pressable
             onPress={openDemo}
-            className="shrink-0 self-center rounded bg-gold-light px-4 py-3 active:opacity-90"
+            className="shrink-0 flex-row items-center justify-center rounded bg-gold-light px-4 py-2.5 active:opacity-90"
           >
-            <Text className="font-bodyMedium text-sm text-primary-container">{REQUEST_DEMO_CTA}</Text>
+            <Text className="font-bodyMedium text-sm leading-none text-primary-container">
+              {REQUEST_DEMO_CTA}
+            </Text>
           </Pressable>
         </View>
       </View>
@@ -89,9 +105,10 @@ export function LandingPage() {
             />
             <View className="absolute inset-0 bg-surface/80" />
             <View
-              className={`relative z-10 items-center px-margin-mobile pb-section-gap pt-28 text-center ${
-                isWide ? "min-h-[560px] justify-center" : "min-h-[480px] justify-center"
+              className={`relative z-10 items-center justify-center px-margin-mobile pb-section-gap text-center ${
+                isWide ? "min-h-[560px]" : "min-h-[480px]"
               }`}
+              style={{ paddingTop: HEADER_BAR_HEIGHT }}
             >
               <Text className="mb-stack-md border-b border-gold-light pb-1 font-bodySemi text-xs uppercase tracking-widest text-gold-light">
                 {HERO.eyebrow}
