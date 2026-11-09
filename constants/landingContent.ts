@@ -1,6 +1,7 @@
 export const BRAND = "CurvioValet";
 export const APP_URL = "https://curviovalet.online";
 export const TAGLINE = "Hotel operation software";
+export const REQUEST_DEMO_CTA = "Request a free demo";
 
 export const HERO = {
   eyebrow: "Smart valet system for your modern hotel",

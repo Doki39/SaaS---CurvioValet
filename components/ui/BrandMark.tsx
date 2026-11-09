@@ -1,45 +1,59 @@
-import { Platform, View, useWindowDimensions, type ImageStyle } from "react-native";
+import { View, useWindowDimensions, type ImageStyle } from "react-native";
 import { Image } from "expo-image";
 
+export type BrandLogoVariant = "main" | "tagline";
+
 type BrandMarkProps = {
-  size?: "sm" | "md" | "lg";
+  size?: "header" | "sm" | "md" | "lg";
+  variant?: BrandLogoVariant;
   onDark?: boolean;
+  align?: "start" | "center";
 };
 
-const LOGO = require("@/assets/curviovalet-logo.jpg");
+const LOGO_MAIN = require("@/assets/curviovalet-logo-main.png");
+const LOGO_TAGLINE = require("@/assets/curviovalet-logo-tagline.png");
 
 const HEIGHT: Record<NonNullable<BrandMarkProps["size"]>, number> = {
-  sm: 52,
-  md: 72,
-  lg: 96,
+  header: 64,
+  sm: 56,
+  md: 76,
+  lg: 100,
 };
 
-const WIDTH_RATIO = 4.8;
+const WIDTH_RATIO: Record<BrandLogoVariant, number> = {
+  main: 3.85,
+  tagline: 4.8,
+};
 
-export function BrandMark({ size, onDark }: BrandMarkProps) {
+export function BrandMark({
+  size,
+  variant = "main",
+  onDark,
+  align = "center",
+}: BrandMarkProps) {
   const { width } = useWindowDimensions();
   const resolved =
     size ?? (width >= 900 ? "lg" : width >= 480 ? "md" : "sm");
   const height = HEIGHT[resolved];
+  const source = variant === "tagline" ? LOGO_TAGLINE : LOGO_MAIN;
 
   const imageStyle: ImageStyle = {
     height,
-    width: height * WIDTH_RATIO,
-    opacity: onDark ? 0.9 : 0.97,
-    ...(Platform.OS === "web" && !onDark ? { mixBlendMode: "multiply" as const } : {}),
+    width: height * WIDTH_RATIO[variant],
+    opacity: onDark ? 0.95 : 1,
   };
 
   return (
     <View
       className={
-        onDark
-          ? "justify-center rounded-lg bg-white/[0.04] px-2 py-1"
-          : "justify-center"
+        align === "start"
+          ? "shrink-0 self-center items-start"
+          : "items-center justify-center"
       }
     >
       <Image
-        source={LOGO}
-        accessibilityLabel="CurvioValet — hotel operation software"
+        source={source}
+        accessibilityLabel="CurvioValet"
         contentFit="contain"
         style={imageStyle}
       />

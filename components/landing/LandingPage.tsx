@@ -20,6 +20,7 @@ import {
   HERO,
   PLANS,
   PROBLEMS,
+  REQUEST_DEMO_CTA,
   ROADMAP,
   STEPS,
   TAGLINE,
@@ -65,19 +66,19 @@ export function LandingPage() {
     <View className="flex-1 bg-surface">
       <StatusBar style="dark" />
       <View className="absolute top-0 z-50 w-full border-b border-outline-variant/30 bg-surface/90">
-        <View className="mx-auto w-full max-w-[1280px] flex-row items-center justify-between px-margin-mobile py-3">
-          <BrandMark />
+        <View className="mx-auto w-full max-w-layout-shell flex-row items-center justify-between px-margin-mobile py-3">
+          <BrandMark align="start" size="header" />
           <Pressable
             onPress={openDemo}
-            className="rounded bg-gold-light px-4 py-2 active:opacity-90"
+            className="shrink-0 self-center rounded bg-gold-light px-4 py-3 active:opacity-90"
           >
-            <Text className="font-bodyMedium text-sm text-primary-container">Request a Demo</Text>
+            <Text className="font-bodyMedium text-sm text-primary-container">{REQUEST_DEMO_CTA}</Text>
           </Pressable>
         </View>
       </View>
 
       <ScrollView className="flex-1" contentContainerClassName="pb-stack-lg" showsVerticalScrollIndicator={false}>
-        <View className="pt-24">
+        <View className="pt-28">
           <View className="items-center px-margin-mobile py-stack-lg text-center">
             <Text className="mb-stack-md border-b border-gold-light pb-1 font-bodySemi text-xs uppercase tracking-widest text-gold-light">
               {HERO.eyebrow}
@@ -90,7 +91,7 @@ export function LandingPage() {
             </Text>
             <View className={`mb-stack-lg w-full gap-stack-md ${isWide ? "max-w-md flex-row" : ""}`}>
               <View className={isWide ? "flex-1" : "w-full"}>
-                <GoldButton label="Request a Demo" shimmer onPress={openDemo} />
+                <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={openDemo} />
               </View>
               <View className={isWide ? "flex-1" : "w-full"}>
                 <OutlineButton label="View Pricing" onPress={scrollToPricing} />
@@ -341,7 +342,7 @@ export function LandingPage() {
               Join the world&apos;s most elegant hotels using {BRAND}.
             </Text>
             <View className="w-full max-w-md gap-4">
-              <GoldButton label="Request a Demo" shimmer onPress={openDemo} />
+              <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={openDemo} />
               <Pressable onPress={openApp}>
                 <Text className="py-4 text-center font-bodyMedium text-primary-container underline">
                   Open the app   {APP_URL.replace("https://", "")}

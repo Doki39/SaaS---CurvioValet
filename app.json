@@ -6,11 +6,11 @@
     "orientation": "portrait",
     "scheme": "curviovalet",
     "userInterfaceStyle": "light",
-    "icon": "./assets/curviovalet-logo.jpg",
+    "icon": "./assets/curviovalet-logo-main.png",
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/curviovalet-logo.jpg"
+      "favicon": "./assets/curviovalet-logo-main.png"
     },
     "plugins": ["expo-router"]
   }

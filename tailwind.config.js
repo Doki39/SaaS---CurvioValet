@@ -24,6 +24,12 @@ module.exports = {
         "surface-container-high": "#e1e3e4",
         "surface-container-low": "#f3f4f5",
       },
+      maxWidth: {
+        "layout-shell": "1280px",
+      },
+      width: {
+        "layout-shell": "89%",
+      },
       spacing: {
         "section-gap": "5rem",
         gutter: "1.5rem",
