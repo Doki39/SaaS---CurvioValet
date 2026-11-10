@@ -3,6 +3,17 @@ export const APP_URL = "https://curviovalet.online";
 export const TAGLINE = "Hotel operation software";
 export const REQUEST_DEMO_CTA = "Request a free demo";
 
+export const FOOTER_PRODUCT_ITEMS = [
+  "Valet mobile app",
+  "Operations dashboard",
+  "AI photo check-in",
+  "Digital vehicle library",
+  "Key photo evidence",
+  "Team task board",
+  "Check-in history & audit logs",
+  "PMS integration",
+];
+
 export const HERO = {
   eyebrow: "Smart valet system for your modern hotel",
   title: "The smarter way to run hotel valet operations",

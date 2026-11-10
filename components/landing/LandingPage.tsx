@@ -1,23 +1,14 @@
-import { useCallback } from "react";
-import {
-  Linking,
-  Pressable,
-  ScrollView,
-  Text,
-  View,
-  useWindowDimensions,
-} from "react-native";
+import { Pressable, ScrollView, Text, View, useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import {
-  APP_URL,
   AUDIENCES,
   BRAND,
   FAQ,
   FEATURES,
+  FOOTER_PRODUCT_ITEMS,
   HERO,
-  PLANS,
   PROBLEMS,
   REQUEST_DEMO_CTA,
   STEPS,
@@ -33,10 +24,11 @@ import {
 } from "@/components/ui/BrandMark";
 import { GoldButton } from "@/components/ui/GoldButton";
 import { OutlineButton } from "@/components/ui/OutlineButton";
-import { PlanPrice } from "@/components/ui/PlanPrice";
 import { FaqItem } from "@/components/landing/FaqItem";
 import { FeatureCapabilityCard } from "@/components/landing/FeatureCapabilityCard";
 import { ProblemsVideo } from "@/components/landing/ProblemsVideo";
+import { PlanCards } from "@/components/pricing/PlanCards";
+import { goToDemo, goToPlans } from "@/lib/planNavigation";
 
 const FEATURE_ICON: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   "photo-camera": "photo-camera",
@@ -49,23 +41,9 @@ const FEATURE_ICON: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   domain: "domain",
 };
 
-function openApp() {
-  void Linking.openURL(APP_URL);
-}
-
-function openDemo() {
-  void Linking.openURL(`mailto:hello@curviovalet.com?subject=${encodeURIComponent(`${BRAND} demo request`)}`);
-}
-
 export function LandingPage() {
   const { width } = useWindowDimensions();
   const isWide = width >= 900;
-
-  const scrollToPricing = useCallback(() => {
-    if (typeof document !== "undefined") {
-      document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
-    }
-  }, []);
 
   return (
     <View className="flex-1 bg-surface">
@@ -83,7 +61,7 @@ export function LandingPage() {
         >
           <BrandMark align="start" size="header" onDark />
           <Pressable
-            onPress={openDemo}
+            onPress={() => goToDemo()}
             className="shrink-0 flex-row items-center justify-center rounded bg-gold-light px-4 py-2.5 active:opacity-90"
           >
             <Text className="font-bodyMedium text-sm leading-none text-primary-container">
@@ -122,10 +100,10 @@ export function LandingPage() {
               </Text>
               <View className={`w-full gap-stack-md ${isWide ? "max-w-md flex-row" : ""}`}>
                 <View className={isWide ? "flex-1" : "w-full"}>
-                  <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={openDemo} />
+                  <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={() => goToDemo()} />
                 </View>
                 <View className={isWide ? "flex-1" : "w-full"}>
-                  <OutlineButton label="View Pricing" onPress={scrollToPricing} />
+                  <OutlineButton label="View Pricing" onPress={goToPlans} />
                 </View>
               </View>
             </View>
@@ -239,39 +217,7 @@ export function LandingPage() {
 
           <View nativeID="pricing" className="bg-surface-container-high px-margin-mobile py-section-gap">
             <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Investment Plans</Text>
-            <View className={`gap-gutter ${isWide ? "flex-row items-stretch justify-center" : ""}`}>
-              {PLANS.map((plan) => (
-                <View
-                  key={plan.id}
-                  className={`rounded-xl border-2 p-8 bg-primary-container ${
-                    plan.popular ? "border-gold-light" : "border-outline-variant/50"
-                  } ${plan.popular && isWide ? "scale-105" : ""} ${isWide ? "w-[320px]" : ""}`}
-                >
-                  {plan.popular ? (
-                    <Text className="mb-2 self-end rounded bg-gold-light px-3 py-1 font-bodySemi text-[10px] uppercase text-primary-container">
-                      Most popular
-                    </Text>
-                  ) : null}
-                  <Text className="mb-2 font-bodySemi text-xs uppercase tracking-widest text-on-primary-container">
-                    {plan.name}
-                  </Text>
-                  <PlanPrice price={plan.price} period={plan.period} />
-                  <View className="mb-8 gap-3">
-                    {plan.features.map((feat) => (
-                      <View key={feat} className="flex-row items-center gap-2">
-                        <MaterialIcons name="done" size={16} color="#D4AF37" />
-                        <Text className="font-body text-sm text-white-pure">{feat}</Text>
-                      </View>
-                    ))}
-                  </View>
-                  {plan.popular ? (
-                    <GoldButton label={plan.cta} shimmer onPress={openApp} />
-                  ) : (
-                    <OutlineButton label={plan.cta} onPress={plan.id === "enterprise" ? openDemo : openApp} />
-                  )}
-                </View>
-              ))}
-            </View>
+            <PlanCards onSelectPlan={goToDemo} variant="onDark" />
           </View>
 
           <View className="px-margin-mobile py-section-gap">
@@ -289,36 +235,35 @@ export function LandingPage() {
               Join the world&apos;s most elegant hotels using {BRAND}.
             </Text>
             <View className="w-full max-w-md gap-4">
-              <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={openDemo} />
+              <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={() => goToDemo()} />
             </View>
           </View>
 
           <View className="w-full border-t border-on-primary-fixed-variant/50 bg-primary-container py-stack-lg">
             <View className="mx-auto w-full max-w-[1280px] gap-8 px-margin-mobile">
-              <BrandMark size="lg" onDark />
               <View className="flex-row gap-8">
                 <View className="flex-1 gap-4">
                   <Text className="font-bodySemi text-xs uppercase tracking-widest text-on-primary-container">
                     Platform
                   </Text>
-                  <Pressable onPress={scrollToPricing}>
+                  <Pressable onPress={goToPlans}>
                     <Text className="font-body text-sm text-on-primary-container underline">Pricing</Text>
-                  </Pressable>
-                  <Pressable onPress={openApp}>
-                    <Text className="font-body text-sm text-on-primary-container underline">Sign in</Text>
                   </Pressable>
                 </View>
                 <View className="flex-1 gap-4">
                   <Text className="font-bodySemi text-xs uppercase tracking-widest text-on-primary-container">
                     Product
                   </Text>
-                  <Text className="font-body text-sm text-on-primary-container">Expo client + REST API</Text>
-                  <Text className="font-body text-sm text-on-primary-container">{TAGLINE}</Text>
+                  {FOOTER_PRODUCT_ITEMS.map((item) => (
+                    <Text key={item} className="font-body text-sm text-on-primary-container">
+                      {item}
+                    </Text>
+                  ))}
                 </View>
               </View>
               <View className="border-t border-on-primary-fixed-variant/30 pt-8">
                 <Text className="font-body text-sm text-on-primary-container">
-                  � {new Date().getFullYear()} {BRAND}. {TAGLINE}.
+                  Copyright {new Date().getFullYear()} {BRAND}. {TAGLINE}.
                 </Text>
               </View>
             </View>

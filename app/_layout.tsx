@@ -28,6 +28,8 @@ export default function RootLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
+      <Stack.Screen name="demo" />
+      <Stack.Screen name="plans" />
     </Stack>
   );
 }
