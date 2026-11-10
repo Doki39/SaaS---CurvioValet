@@ -222,12 +222,12 @@ export const PLANS = [
 export const FAQ = [
   {
     q: "Does it require a guest app?",
-    a: "No. Your staff handles everything. Guests can receive an optional SMS link to request their car   no downloads required (on roadmap).",
+    a: "No guest app is required. Your team runs the full workflow in CurvioValet; guests never need to install software. You may optionally send an SMS with a secure link so they can view their vehicle profile and submit a retrieval request through the link.",
     open: true,
   },
   {
     q: "How accurate is the AI?",
-    a: "License plate and vehicle field extraction is tuned for European plates; staff always confirm before the record is saved.",
+    a: "Extraction is tuned for common brands and standard plates. Staff needs to accept the AI-filled fields. Nothing is saved until your team confirms, so your library always reflects verified data, not raw model output.",
     open: false,
   },
   {

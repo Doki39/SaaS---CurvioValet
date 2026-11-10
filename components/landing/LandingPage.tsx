@@ -290,11 +290,6 @@ export function LandingPage() {
             </Text>
             <View className="w-full max-w-md gap-4">
               <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={openDemo} />
-              <Pressable onPress={openApp}>
-                <Text className="py-4 text-center font-bodyMedium text-gold-light underline">
-                  Open the app   {APP_URL.replace("https://", "")}
-                </Text>
-              </Pressable>
             </View>
           </View>
 
