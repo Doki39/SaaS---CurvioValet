@@ -9,7 +9,8 @@
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
     "lint": "npx expo lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:web": "expo export --platform web"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.4.1",
