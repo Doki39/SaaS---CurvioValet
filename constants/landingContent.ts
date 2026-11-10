@@ -1,5 +1,4 @@
 export const BRAND = "CurvioValet";
-export const APP_URL = "https://curviovalet.online";
 export const TAGLINE = "Hotel operation software";
 export const REQUEST_DEMO_CTA = "Request a free demo";
 
@@ -41,10 +40,7 @@ export const FOOTER_NAV_COLUMNS: {
   },
   {
     title: "Company",
-    links: [
-      { label: "Request a free demo", action: "demo" },
-      { label: "Product sign-in", href: APP_URL },
-    ],
+    links: [{ label: "Request a free demo", action: "demo" }],
   },
 ];
 
