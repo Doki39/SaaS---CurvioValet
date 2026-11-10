@@ -120,6 +120,13 @@ export const STEPS = [
   },
 ];
 
+export const SURROUNDINGS_QUOTE = {
+  title: "Respect the Surroundings",
+  body:
+    "Built from years of firsthand experience in the hotel industry, CurvioValet was designed around the people who make every guest experience count. From the moment a vehicle arrives, one photo captures the details your team needs. Vehicle information, key management and parking location all organized in one place.",
+  emphasis: "Less searching. Fewer delays. More time for what matters: your guests.",
+};
+
 export const FEATURES = [
   {
     icon: "photo-camera" as const,
@@ -134,7 +141,8 @@ export const FEATURES = [
   {
     icon: "visibility-off" as const,
     title: "Car Location Without Markings",
-    body: "Virtual zoning technology replaces physical chalk and floor paint.",
+    body:
+      "Your team always knows where each vehicle is and can move it with ease whenever the lot needs to shift.",
   },
   {
     icon: "vpn-key" as const,
@@ -206,7 +214,7 @@ export const PLANS = [
   {
     id: "pro",
     name: "Professional",
-    price: "\u20ac249",
+    price: "\u20ac199",
     period: "/month",
     features: [
       "Everything in Starter",

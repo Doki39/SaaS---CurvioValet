@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Pressable, ScrollView, Text, View, useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -12,6 +13,7 @@ import {
   PROBLEMS,
   REQUEST_DEMO_CTA,
   STEPS,
+  SURROUNDINGS_QUOTE,
   TAGLINE,
   WHY_POINTS,
 } from "@/constants/landingContent";
@@ -28,7 +30,11 @@ import { FaqItem } from "@/components/landing/FaqItem";
 import { FeatureCapabilityCard } from "@/components/landing/FeatureCapabilityCard";
 import { ProblemsVideo } from "@/components/landing/ProblemsVideo";
 import { PlanCards } from "@/components/pricing/PlanCards";
-import { goToDemo, goToPlans } from "@/lib/planNavigation";
+import {
+  consumeScrollToPricingFlag,
+  goToDemo,
+  scrollToPricingSection,
+} from "@/lib/planNavigation";
 
 const FEATURE_ICON: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   "photo-camera": "photo-camera",
@@ -44,6 +50,12 @@ const FEATURE_ICON: Record<string, keyof typeof MaterialIcons.glyphMap> = {
 export function LandingPage() {
   const { width } = useWindowDimensions();
   const isWide = width >= 900;
+
+  useEffect(() => {
+    if (!consumeScrollToPricingFlag()) return;
+    const t = setTimeout(() => scrollToPricingSection(), 150);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <View className="flex-1 bg-surface">
@@ -103,7 +115,7 @@ export function LandingPage() {
                   <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={() => goToDemo()} />
                 </View>
                 <View className={isWide ? "flex-1" : "w-full"}>
-                  <OutlineButton label="View Pricing" onPress={goToPlans} />
+                  <OutlineButton label="View Pricing" onPress={scrollToPricingSection} />
                 </View>
               </View>
             </View>
@@ -157,14 +169,11 @@ export function LandingPage() {
             <View className="mx-auto max-w-md items-center">
               <MaterialIcons name="format-quote" size={40} color="#D4AF37" style={{ marginBottom: 16 }} />
               <Text className="mb-stack-md text-center font-displaySemi text-3xl text-white-pure">
-                Respect the Surroundings
+                {SURROUNDINGS_QUOTE.title}
               </Text>
               <Text className="text-center font-body text-lg italic leading-7 text-on-primary-container">
-                &quot;We value your parking surroundings and want to avoid ugly markings. Instead of chalk
-                numbers, painted spots, or temporary floor labels, we built a smarter way   using data you
-                already capture at check-in. One photo, one digital record, and your team always knows where
-                the car is.{" "}
-                <Text className="font-bodySemi text-white-pure not-italic">Clean aesthetics outside. Complete clarity inside.</Text>
+                &quot;{SURROUNDINGS_QUOTE.body}{" "}
+                <Text className="font-bodySemi text-white-pure not-italic">{SURROUNDINGS_QUOTE.emphasis}</Text>
                 &quot;
               </Text>
             </View>
@@ -246,7 +255,7 @@ export function LandingPage() {
                   <Text className="font-bodySemi text-xs uppercase tracking-widest text-on-primary-container">
                     Platform
                   </Text>
-                  <Pressable onPress={goToPlans}>
+                  <Pressable onPress={scrollToPricingSection}>
                     <Text className="font-body text-sm text-on-primary-container underline">Pricing</Text>
                   </Pressable>
                 </View>

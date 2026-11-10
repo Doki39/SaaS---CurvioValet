@@ -10,7 +10,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { MaterialIcons } from "@expo/vector-icons";
 import { BRAND, REQUEST_DEMO_CTA } from "@/constants/landingContent";
@@ -18,7 +18,14 @@ import { getDemoFormAccessKey } from "@/constants/demoForm";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { GoldButton } from "@/components/ui/GoldButton";
 import { demoMailtoFallback, submitDemoRequest } from "@/lib/submitDemoRequest";
-import { goToPlans, planLabelForId } from "@/lib/planNavigation";
+import {
+  FREE_DEMO_PLAN_ID,
+  goToHome,
+  isDemoFormPlanId,
+  planLabelForId,
+  type DemoFormPlanId,
+} from "@/lib/planNavigation";
+import { PlanSelectField } from "@/components/demo/PlanSelectField";
 
 type FieldKey =
   | "name"
@@ -44,7 +51,11 @@ function paramValue(value: string | string[] | undefined): string | undefined {
 
 export function DemoRequestScreen() {
   const { plan: planParam } = useLocalSearchParams<{ plan?: string | string[] }>();
-  const selectedPlanLabel = planLabelForId(paramValue(planParam)) ?? "";
+  const initialPlan = paramValue(planParam);
+  const [planId, setPlanId] = useState<DemoFormPlanId>(
+    isDemoFormPlanId(initialPlan) ? initialPlan : FREE_DEMO_PLAN_ID
+  );
+  const selectedPlanLabel = planLabelForId(planId) ?? "";
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -95,7 +106,7 @@ export function DemoRequestScreen() {
     }
 
     setError(result.message ?? "Something went wrong. Please try again.");
-  }, [name, email, propertyName, phone, roomCount, parkingSpots, selectedPlanLabel, message]);
+  }, [name, email, propertyName, phone, roomCount, parkingSpots, planId, selectedPlanLabel, message]);
 
   const setters: Record<FieldKey, (v: string) => void> = {
     name: setName,
@@ -129,7 +140,7 @@ export function DemoRequestScreen() {
           <Text className="mb-8 max-w-md text-center font-body text-base leading-6 text-secondary">
             Thanks for your interest in {BRAND}. We will reach out shortly at {email}.
           </Text>
-          <GoldButton label="Back to home" onPress={() => router.replace("/")} className="w-full max-w-sm" />
+          <GoldButton label="Back to home" onPress={goToHome} className="w-full max-w-sm" />
         </View>
       </View>
     );
@@ -152,7 +163,7 @@ export function DemoRequestScreen() {
       >
         <View className="border-b border-outline-variant/30 px-margin-mobile py-4">
           <Pressable
-            onPress={() => router.back()}
+            onPress={goToHome}
             className="mb-4 flex-row items-center gap-1 self-start active:opacity-70"
           >
             <MaterialIcons name="arrow-back" size={22} color="#545f73" />
@@ -169,24 +180,6 @@ export function DemoRequestScreen() {
             </Text>
           </View>
 
-          <View className="flex-row flex-wrap items-center justify-between gap-2 rounded border border-outline-variant/50 bg-surface-container-low px-4 py-3">
-            <Text className="font-body text-sm text-secondary">
-              {selectedPlanLabel ? (
-                <>
-                  Selected plan:{" "}
-                  <Text className="font-bodySemi text-primary">{selectedPlanLabel}</Text>
-                </>
-              ) : (
-                "No plan selected yet."
-              )}
-            </Text>
-            <Pressable onPress={goToPlans} className="active:opacity-70">
-              <Text className="font-bodyMedium text-sm text-gold-light underline">
-                {selectedPlanLabel ? "Change plan" : "Browse plans"}
-              </Text>
-            </Pressable>
-          </View>
-
           {!configured ? (
             <View className="rounded border border-gold-light/50 bg-surface-container-low px-4 py-3">
               <Text className="font-body text-sm leading-5 text-secondary">
@@ -197,6 +190,14 @@ export function DemoRequestScreen() {
           ) : null}
 
           <View className="gap-4">
+            <Field label="Plan">
+              <PlanSelectField
+                value={planId}
+                onChange={setPlanId}
+                fieldClass={fieldClass}
+                fieldStyle={fieldStyle}
+              />
+            </Field>
             <Field label="Full name" required>
               <TextInput
                 value={values.name}
