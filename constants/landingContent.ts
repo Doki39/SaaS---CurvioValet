@@ -114,49 +114,41 @@ export const FEATURES = [
     icon: "photo-camera" as const,
     title: "Quick Check-In (AI Photo Intake)",
     body: "Instant license plate and condition recognition via mobile lens.",
-    highlight: false,
   },
   {
     icon: "inventory" as const,
     title: "Digital Vehicle Library",
     body: "A searchable, real-time database of all cars currently on the property.",
-    highlight: false,
   },
   {
     icon: "visibility-off" as const,
     title: "Car Location Without Markings",
     body: "Virtual zoning technology replaces physical chalk and floor paint.",
-    highlight: true,
   },
   {
     icon: "vpn-key" as const,
     title: "Key Photo Evidence",
     body: "Visual confirmation of key placement in secure lockers for accountability.",
-    highlight: false,
   },
   {
     icon: "assignment" as const,
     title: "Task Board for Teams",
     body: "Coordinate retrievals and arrivals between valets and the front desk.",
-    highlight: false,
   },
   {
     icon: "history" as const,
     title: "Check-In History",
     body: "Detailed logs for every guest visit, vehicle, and handling staff.",
-    highlight: false,
   },
   {
     icon: "apartment" as const,
     title: "Organisation Management",
     body: "Scale operations with unified branding and user permissions.",
-    highlight: false,
   },
   {
     icon: "domain" as const,
     title: "Multi-Property Control",
     body: "Switch between hotel locations within one master dashboard.",
-    highlight: false,
   },
 ];
 

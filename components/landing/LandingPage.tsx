@@ -35,6 +35,7 @@ import { GoldButton } from "@/components/ui/GoldButton";
 import { OutlineButton } from "@/components/ui/OutlineButton";
 import { PlanPrice } from "@/components/ui/PlanPrice";
 import { FaqItem } from "@/components/landing/FaqItem";
+import { FeatureCapabilityCard } from "@/components/landing/FeatureCapabilityCard";
 import { ProblemsVideo } from "@/components/landing/ProblemsVideo";
 
 const FEATURE_ICON: Record<string, keyof typeof MaterialIcons.glyphMap> = {
@@ -195,16 +196,13 @@ export function LandingPage() {
             <Text className="mb-stack-lg font-displaySemi text-2xl text-white-pure">Platform Capabilities</Text>
             <View className={`gap-4 ${isWide ? "flex-row flex-wrap" : ""}`}>
               {FEATURES.map((f) => (
-                <View
+                <FeatureCapabilityCard
                   key={f.title}
-                  className={`glass-card gap-3 rounded-xl p-6 ${f.highlight ? "border-2 border-gold-light" : ""} ${
-                    isWide ? "w-[calc(50%-0.5rem)]" : "w-full"
-                  }`}
-                >
-                  <MaterialIcons name={FEATURE_ICON[f.icon]} size={28} color="#D4AF37" />
-                  <Text className="font-bodySemi text-base text-white-pure">{f.title}</Text>
-                  <Text className="font-body text-sm text-on-primary-container">{f.body}</Text>
-                </View>
+                  icon={FEATURE_ICON[f.icon]}
+                  title={f.title}
+                  body={f.body}
+                  widthClass={isWide ? "w-[calc(50%-0.5rem)]" : "w-full"}
+                />
               ))}
             </View>
           </View>

@@ -6,6 +6,22 @@
   .glass-card {
     @apply border border-outline-variant/50 bg-surface-container-low/80;
   }
+
+  .capability-card {
+    @apply transition-[border-color,box-shadow] duration-200;
+  }
+}
+
+@media (hover: hover) {
+  .capability-card:hover {
+    border-color: rgba(212, 175, 55, 0.75);
+    box-shadow: 0 0 28px rgba(212, 175, 55, 0.22);
+  }
+}
+
+.capability-card:active {
+  border-color: #d4af37;
+  box-shadow: 0 0 32px rgba(212, 175, 55, 0.35);
 }
 
 @keyframes shimmer {
