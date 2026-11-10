@@ -9,10 +9,10 @@ type OutlineButtonProps = PressableProps & {
 export function OutlineButton({ label, className = "", ...props }: OutlineButtonProps) {
   return (
     <Pressable
-      className={`rounded-lg border border-primary-container py-4 px-6 active:bg-primary-container ${className}`}
+      className={`rounded-lg border border-gold-light py-4 px-6 active:bg-surface-container/80 ${className}`}
       {...props}
     >
-      <Text className="text-center font-bodyMedium text-[15px] text-primary-container">{label}</Text>
+      <Text className="text-center font-bodyMedium text-[15px] text-white-pure">{label}</Text>
     </Pressable>
   );
 }

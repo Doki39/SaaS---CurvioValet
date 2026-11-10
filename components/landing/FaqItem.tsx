@@ -12,16 +12,16 @@ export function FaqItem({ question, answer, defaultOpen = false }: FaqItemProps)
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <View className="rounded-lg border border-outline-variant/30 bg-white-pure p-4">
+    <View className="rounded-lg border border-outline-variant/50 bg-surface-container p-4">
       <Pressable onPress={() => setOpen((v) => !v)} className="flex-row items-center justify-between">
-        <Text className="flex-1 pr-2 font-bodySemi text-base text-primary">{question}</Text>
+        <Text className="flex-1 pr-2 font-bodySemi text-base text-white-pure">{question}</Text>
         <MaterialIcons
           name={open ? "expand-less" : "expand-more"}
           size={24}
-          color="#545f73"
+          color="#9aa3b8"
         />
       </Pressable>
-      {open ? <Text className="mt-4 font-body text-sm leading-5 text-secondary">{answer}</Text> : null}
+      {open ? <Text className="mt-4 font-body text-sm leading-5 text-on-primary-container">{answer}</Text> : null}
     </View>
   );
 }

@@ -69,9 +69,9 @@ export function LandingPage() {
 
   return (
     <View className="flex-1 bg-surface">
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <View
-        className="absolute top-0 z-50 w-full border-b border-outline-variant/30 bg-surface/90"
+        className="absolute top-0 z-50 w-full border-b border-outline-variant/50 bg-primary-container/90"
         style={{
           paddingTop: HEADER_BAR_PADDING_Y,
           paddingBottom: HEADER_BAR_PADDING_Y,
@@ -81,7 +81,7 @@ export function LandingPage() {
           className="mx-auto w-full max-w-layout-shell flex-row items-center justify-between px-margin-mobile"
           style={{ height: HEADER_BRAND_HEIGHT }}
         >
-          <BrandMark align="start" size="header" />
+          <BrandMark align="start" size="header" onDark />
           <Pressable
             onPress={openDemo}
             className="shrink-0 flex-row items-center justify-center rounded bg-gold-light px-4 py-2.5 active:opacity-90"
@@ -104,7 +104,7 @@ export function LandingPage() {
               priority="high"
               cachePolicy="memory-disk"
             />
-            <View className="absolute inset-0 bg-surface/80" />
+            <View className="absolute inset-0 bg-primary-container/70" />
             <View
               className={`relative z-10 items-center justify-center px-margin-mobile pb-section-gap text-center ${
                 isWide ? "min-h-[560px]" : "min-h-[480px]"
@@ -114,10 +114,10 @@ export function LandingPage() {
               <Text className="mb-stack-md border-b border-gold-light pb-1 font-bodySemi text-xs uppercase tracking-widest text-gold-light">
                 {HERO.eyebrow}
               </Text>
-              <Text className="mb-stack-md text-center font-display text-4xl leading-tight text-primary">
+              <Text className="mb-stack-md text-center font-display text-4xl leading-tight text-white-pure">
                 {HERO.title}
               </Text>
-              <Text className="mb-stack-lg max-w-xl text-center font-body text-lg leading-7 text-secondary">
+              <Text className="mb-stack-lg max-w-xl text-center font-body text-lg leading-7 text-on-primary-container">
                 {HERO.subtitle}
               </Text>
               <View className={`w-full gap-stack-md ${isWide ? "max-w-md flex-row" : ""}`}>
@@ -178,22 +178,22 @@ export function LandingPage() {
           <View className="bg-surface-container-low px-margin-mobile py-section-gap">
             <View className="mx-auto max-w-md items-center">
               <MaterialIcons name="format-quote" size={40} color="#D4AF37" style={{ marginBottom: 16 }} />
-              <Text className="mb-stack-md text-center font-displaySemi text-3xl text-primary">
+              <Text className="mb-stack-md text-center font-displaySemi text-3xl text-white-pure">
                 Respect the Surroundings
               </Text>
-              <Text className="text-center font-body text-lg italic leading-7 text-secondary">
+              <Text className="text-center font-body text-lg italic leading-7 text-on-primary-container">
                 &quot;We value your parking surroundings and want to avoid ugly markings. Instead of chalk
                 numbers, painted spots, or temporary floor labels, we built a smarter way   using data you
                 already capture at check-in. One photo, one digital record, and your team always knows where
                 the car is.{" "}
-                <Text className="font-bodySemi text-primary not-italic">Clean aesthetics outside. Complete clarity inside.</Text>
+                <Text className="font-bodySemi text-white-pure not-italic">Clean aesthetics outside. Complete clarity inside.</Text>
                 &quot;
               </Text>
             </View>
           </View>
 
           <View className="bg-surface-container px-margin-mobile py-section-gap">
-            <Text className="mb-stack-lg font-displaySemi text-2xl text-primary">Platform Capabilities</Text>
+            <Text className="mb-stack-lg font-displaySemi text-2xl text-white-pure">Platform Capabilities</Text>
             <View className={`gap-4 ${isWide ? "flex-row flex-wrap" : ""}`}>
               {FEATURES.map((f) => (
                 <View
@@ -203,26 +203,26 @@ export function LandingPage() {
                   }`}
                 >
                   <MaterialIcons name={FEATURE_ICON[f.icon]} size={28} color="#D4AF37" />
-                  <Text className="font-bodySemi text-base text-primary">{f.title}</Text>
-                  <Text className="font-body text-sm text-secondary">{f.body}</Text>
+                  <Text className="font-bodySemi text-base text-white-pure">{f.title}</Text>
+                  <Text className="font-body text-sm text-on-primary-container">{f.body}</Text>
                 </View>
               ))}
             </View>
           </View>
 
           <View className="px-margin-mobile py-section-gap">
-            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-primary">
+            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">
               Built for the Entire Team
             </Text>
             <View className={`gap-gutter ${isWide ? "flex-row" : ""}`}>
               {AUDIENCES.map((a) => (
                 <View
                   key={a.title}
-                  className={`items-center rounded-xl border border-outline-variant/30 bg-white-pure p-6 shadow-sm ${isWide ? "flex-1" : ""}`}
+                  className={`items-center rounded-xl border border-outline-variant/50 bg-surface-container p-6 ${isWide ? "flex-1" : ""}`}
                 >
                   <Image source={{ uri: a.image }} className="mb-4 h-20 w-20 rounded-full" contentFit="cover" />
-                  <Text className="mb-2 font-displaySemi text-2xl text-primary">{a.title}</Text>
-                  <Text className="text-center font-body text-sm text-secondary">{a.body}</Text>
+                  <Text className="mb-2 font-displaySemi text-2xl text-white-pure">{a.title}</Text>
+                  <Text className="text-center font-body text-sm text-on-primary-container">{a.body}</Text>
                 </View>
               ))}
             </View>
@@ -241,15 +241,13 @@ export function LandingPage() {
           </View>
 
           <View nativeID="pricing" className="bg-surface-container-high px-margin-mobile py-section-gap">
-            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-primary">Investment Plans</Text>
+            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Investment Plans</Text>
             <View className={`gap-gutter ${isWide ? "flex-row items-stretch justify-center" : ""}`}>
               {PLANS.map((plan) => (
                 <View
                   key={plan.id}
-                  className={`rounded-xl p-8 ${
-                    plan.dark
-                      ? "border-2 border-gold-light bg-primary-container"
-                      : "border border-outline-variant/50 bg-white-pure"
+                  className={`rounded-xl border-2 p-8 bg-primary-container ${
+                    plan.popular ? "border-gold-light" : "border-outline-variant/50"
                   } ${plan.popular && isWide ? "scale-105" : ""} ${isWide ? "w-[320px]" : ""}`}
                 >
                   {plan.popular ? (
@@ -257,27 +255,19 @@ export function LandingPage() {
                       Most popular
                     </Text>
                   ) : null}
-                  <Text
-                    className={`mb-2 font-bodySemi text-xs uppercase tracking-widest ${
-                      plan.dark ? "text-on-primary-container" : "text-secondary"
-                    }`}
-                  >
+                  <Text className="mb-2 font-bodySemi text-xs uppercase tracking-widest text-on-primary-container">
                     {plan.name}
                   </Text>
-                  <PlanPrice price={plan.price} period={plan.period} dark={plan.dark} />
+                  <PlanPrice price={plan.price} period={plan.period} />
                   <View className="mb-8 gap-3">
                     {plan.features.map((feat) => (
                       <View key={feat} className="flex-row items-center gap-2">
                         <MaterialIcons name="done" size={16} color="#D4AF37" />
-                        <Text
-                          className={`font-body text-sm ${plan.dark ? "text-white-pure" : "text-primary"}`}
-                        >
-                          {feat}
-                        </Text>
+                        <Text className="font-body text-sm text-white-pure">{feat}</Text>
                       </View>
                     ))}
                   </View>
-                  {plan.dark ? (
+                  {plan.popular ? (
                     <GoldButton label={plan.cta} shimmer onPress={openApp} />
                   ) : (
                     <OutlineButton label={plan.cta} onPress={plan.id === "enterprise" ? openDemo : openApp} />
@@ -288,7 +278,7 @@ export function LandingPage() {
           </View>
 
           <View className="px-margin-mobile py-section-gap">
-            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-primary">Visionary Roadmap</Text>
+            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Visionary Roadmap</Text>
             <View className="mx-auto max-w-xs gap-stack-lg">
               {ROADMAP.map((item, index) => (
                 <View key={item.title} className={`flex-row gap-4 ${item.done ? "" : "opacity-50"}`}>
@@ -302,7 +292,7 @@ export function LandingPage() {
                   </View>
                   <View className="pb-6">
                     <Text className="font-bodySemi text-xs text-gold-light">{item.when}</Text>
-                    <Text className="font-bodySemi text-base text-primary">{item.title}</Text>
+                    <Text className="font-bodySemi text-base text-white-pure">{item.title}</Text>
                   </View>
                 </View>
               ))}
@@ -310,33 +300,33 @@ export function LandingPage() {
           </View>
 
           <View className="bg-surface px-margin-mobile py-section-gap">
-            <Text className="mb-8 text-center font-bodySemi text-xs uppercase tracking-widest text-secondary">
+            <Text className="mb-8 text-center font-bodySemi text-xs uppercase tracking-widest text-on-primary-container">
               Trusted by industry leaders
             </Text>
             <View className="mb-stack-lg flex-row flex-wrap justify-center gap-8 opacity-40">
               {["L'HOTEL", "PALACE", "GRAND", "RESORT"].map((name) => (
-                <Text key={name} className="font-display text-2xl text-primary">
+                <Text key={name} className="font-display text-2xl text-white-pure">
                   {name}
                 </Text>
               ))}
             </View>
-            <View className="rounded-xl border border-outline-variant/30 bg-white-pure p-8 shadow-sm">
-              <Text className="mb-6 font-body italic text-base text-primary">
+            <View className="rounded-xl border border-outline-variant/50 bg-surface-container p-8">
+              <Text className="mb-6 font-body italic text-base text-white-pure">
                 &quot;{BRAND} transformed our arrival experience. The visual integrity of our driveway is
                 preserved, and the team finally has complete clarity.&quot;
               </Text>
               <View className="flex-row items-center gap-4">
-                <View className="h-12 w-12 rounded-full bg-surface-container" />
+                <View className="h-12 w-12 rounded-full bg-surface-container-high" />
                 <View>
-                  <Text className="font-bodySemi text-primary">Marcus Thorne</Text>
-                  <Text className="font-body text-xs text-secondary">General Manager, Grand Plaza</Text>
+                  <Text className="font-bodySemi text-white-pure">Marcus Thorne</Text>
+                  <Text className="font-body text-xs text-on-primary-container">General Manager, Grand Plaza</Text>
                 </View>
               </View>
             </View>
           </View>
 
           <View className="px-margin-mobile py-section-gap">
-            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-primary">Common Questions</Text>
+            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Common Questions</Text>
             <View className="gap-4">
               {FAQ.map((item) => (
                 <FaqItem key={item.q} question={item.q} answer={item.a} defaultOpen={item.open} />
@@ -345,14 +335,14 @@ export function LandingPage() {
           </View>
 
           <View className="items-center px-margin-mobile py-section-gap">
-            <Text className="mb-stack-md text-center font-display text-4xl text-primary">Ready to modernize?</Text>
-            <Text className="mb-stack-lg text-center font-body text-base text-secondary">
+            <Text className="mb-stack-md text-center font-display text-4xl text-white-pure">Ready to modernize?</Text>
+            <Text className="mb-stack-lg text-center font-body text-base text-on-primary-container">
               Join the world&apos;s most elegant hotels using {BRAND}.
             </Text>
             <View className="w-full max-w-md gap-4">
               <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={openDemo} />
               <Pressable onPress={openApp}>
-                <Text className="py-4 text-center font-bodyMedium text-primary-container underline">
+                <Text className="py-4 text-center font-bodyMedium text-gold-light underline">
                   Open the app   {APP_URL.replace("https://", "")}
                 </Text>
               </Pressable>

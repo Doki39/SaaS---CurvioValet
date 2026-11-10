@@ -198,7 +198,7 @@ export const PLANS = [
     features: ["AI Photo Check-in", "300 Cars / Month", "Key Photo Library"],
     cta: "Get Started",
     popular: false,
-    dark: false,
+    dark: true,
   },
   {
     id: "pro",
@@ -223,7 +223,7 @@ export const PLANS = [
     features: ["Multi-Property Dashboard", "Oracle Integration", "Dedicated Account Mgr"],
     cta: "Contact Sales",
     popular: false,
-    dark: false,
+    dark: true,
   },
 ];
 
