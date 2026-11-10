@@ -89,7 +89,7 @@ export function SiteFooter({ isWide }: SiteFooterProps) {
             © {year} {BRAND}. {TAGLINE}.
           </Text>
           {showStores ? (
-            <View className={`flex-row flex-wrap gap-3 ${isWide ? "" : ""}`}>
+            <View className="flex-row flex-wrap gap-3">
               {appStoreUrl ? (
                 <StoreBadge label="Download on the App Store" icon="apple" url={appStoreUrl} />
               ) : null}

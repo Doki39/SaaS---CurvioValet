@@ -8,15 +8,28 @@ type BrandMarkProps = {
   height?: number;
   variant?: BrandLogoVariant;
   onDark?: boolean;
-  align?: "start" | "center";
+  align?: "start" | "center" | "end";
 };
 
 const LOGO_MAIN = require("@/assets/curviovalet-logo-main.png");
 const LOGO_TAGLINE = require("@/assets/curviovalet-logo-tagline.png");
 
+export const HEADER_COMPACT_MAX_WIDTH = 900;
+
 export const HEADER_BRAND_HEIGHT = 96;
 export const HEADER_BAR_PADDING_Y = 16;
 export const HEADER_BAR_HEIGHT = HEADER_BRAND_HEIGHT + HEADER_BAR_PADDING_Y * 2;
+
+export function getHeaderMetrics(windowWidth: number) {
+  const compact = windowWidth < HEADER_COMPACT_MAX_WIDTH;
+  const brandHeight = compact ? HEADER_BRAND_HEIGHT / 2 : HEADER_BRAND_HEIGHT;
+  const paddingY = compact ? HEADER_BAR_PADDING_Y / 2 : HEADER_BAR_PADDING_Y;
+  return {
+    brandHeight,
+    paddingY,
+    barHeight: brandHeight + paddingY * 2,
+  };
+}
 
 const HEIGHT: Record<NonNullable<BrandMarkProps["size"]>, number> = {
   header: HEADER_BRAND_HEIGHT,
@@ -40,7 +53,9 @@ export function BrandMark({
   const { width } = useWindowDimensions();
   const resolved =
     size ?? (width >= 900 ? "lg" : width >= 480 ? "md" : "sm");
-  const height = heightOverride ?? HEIGHT[resolved];
+  const height =
+    heightOverride ??
+    (size === "header" ? getHeaderMetrics(width).brandHeight : HEIGHT[resolved]);
   const source = variant === "tagline" ? LOGO_TAGLINE : LOGO_MAIN;
 
   const isHeader = size === "header" || (size === undefined && resolved === "header");
@@ -56,7 +71,9 @@ export function BrandMark({
       className={
         align === "start"
           ? "shrink-0 justify-center"
-          : "items-center justify-center"
+          : align === "end"
+            ? "shrink-0 items-end justify-center"
+            : "items-center justify-center"
       }
     >
       <Image

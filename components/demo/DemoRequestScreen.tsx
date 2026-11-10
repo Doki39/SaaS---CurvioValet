@@ -37,12 +37,14 @@ type FieldKey =
   | "message";
 
 const fieldClass =
-  "rounded border border-outline-variant/50 bg-white-pure px-4 py-3 font-body text-base text-primary";
+  "rounded border border-outline-variant/50 bg-surface-container-high px-4 py-3 font-body text-base text-white-pure";
 
-const pageSurfaceStyle = { backgroundColor: "#f8f9fa" as const };
-const webPageStyle = Platform.OS === "web" ? { ...pageSurfaceStyle, minHeight: "100%" as const } : pageSurfaceStyle;
+const SURFACE_DARK = "#131b2e";
+const webPageStyle =
+  Platform.OS === "web" ? ({ minHeight: "100%", backgroundColor: SURFACE_DARK } as const) : { backgroundColor: SURFACE_DARK };
 const fieldStyle =
-  Platform.OS === "web" ? { backgroundColor: "#FFFFFF", color: "#000000" } : undefined;
+  Platform.OS === "web" ? { backgroundColor: "#252d4a", color: "#FFFFFF" } : { backgroundColor: "#252d4a", color: "#FFFFFF" };
+const placeholderColor = "#9aa3b8";
 
 function paramValue(value: string | string[] | undefined): string | undefined {
   if (Array.isArray(value)) return value[0];
@@ -131,13 +133,13 @@ export function DemoRequestScreen() {
   if (sent) {
     return (
       <View className="flex-1 bg-surface" style={webPageStyle}>
-        <StatusBar style="dark" />
+        <StatusBar style="light" />
         <View className="flex-1 items-center justify-center px-margin-mobile">
           <MaterialIcons name="check-circle" size={56} color="#D4AF37" />
-          <Text className="mb-2 mt-6 text-center font-displaySemi text-2xl text-primary">
+          <Text className="mb-2 mt-6 text-center font-displaySemi text-2xl text-white-pure">
             Request received
           </Text>
-          <Text className="mb-8 max-w-md text-center font-body text-base leading-6 text-secondary">
+          <Text className="mb-8 max-w-md text-center font-body text-base leading-6 text-on-primary-container">
             Thanks for your interest in {BRAND}. We will reach out shortly at {email}.
           </Text>
           <GoldButton label="Back to home" onPress={goToHome} className="w-full max-w-sm" />
@@ -154,7 +156,7 @@ export function DemoRequestScreen() {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       style={webPageStyle}
     >
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <ScrollView
         className="flex-1 bg-surface"
         contentContainerClassName="grow bg-surface pb-stack-lg"
@@ -162,27 +164,29 @@ export function DemoRequestScreen() {
         style={webPageStyle}
       >
         <View className="border-b border-outline-variant/30 px-margin-mobile py-4">
-          <Pressable
-            onPress={goToHome}
-            className="mb-4 flex-row items-center gap-1 self-start active:opacity-70"
-          >
-            <MaterialIcons name="arrow-back" size={22} color="#545f73" />
-            <Text className="font-bodyMedium text-sm text-secondary">Back</Text>
-          </Pressable>
-          <BrandMark align="start" size="header" />
+          <View className="flex-row items-center justify-between gap-3">
+            <Pressable
+              onPress={goToHome}
+              className="shrink flex-row items-center gap-1 active:opacity-70"
+            >
+              <MaterialIcons name="arrow-back" size={22} color="#a8b0c4" />
+              <Text className="font-bodyMedium text-sm text-on-primary-container">Back</Text>
+            </Pressable>
+            <BrandMark align="end" size="header" onDark />
+          </View>
         </View>
 
         <View className="mx-auto w-full max-w-lg gap-6 px-margin-mobile py-stack-lg">
           <View>
-            <Text className="mb-2 font-displaySemi text-3xl text-primary">{REQUEST_DEMO_CTA}</Text>
-            <Text className="font-body text-base leading-6 text-secondary">
+            <Text className="mb-2 font-displaySemi text-3xl text-white-pure">{REQUEST_DEMO_CTA}</Text>
+            <Text className="font-body text-base leading-6 text-on-primary-container">
               Tell us about your property and we will schedule a walkthrough of {BRAND}.
             </Text>
           </View>
 
           {!configured ? (
             <View className="rounded border border-gold-light/50 bg-surface-container-low px-4 py-3">
-              <Text className="font-body text-sm leading-5 text-secondary">
+              <Text className="font-body text-sm leading-5 text-on-primary-container">
                 Online delivery is not configured yet; submitting will open your email client as a fallback.
                 Add EXPO_PUBLIC_WEB3FORMS_ACCESS_KEY in .env to send directly to our inbox.
               </Text>
@@ -205,7 +209,7 @@ export function DemoRequestScreen() {
                 className={fieldClass}
                 style={fieldStyle}
                 placeholder="Jordan Smith"
-                placeholderTextColor="#7c839b"
+                placeholderTextColor={placeholderColor}
                 autoComplete="name"
               />
             </Field>
@@ -216,7 +220,7 @@ export function DemoRequestScreen() {
                 className={fieldClass}
                 style={fieldStyle}
                 placeholder="you@hotel.com"
-                placeholderTextColor="#7c839b"
+                placeholderTextColor={placeholderColor}
                 keyboardType="email-address"
                 autoCapitalize="none"
                 autoComplete="email"
@@ -229,7 +233,7 @@ export function DemoRequestScreen() {
                 className={fieldClass}
                 style={fieldStyle}
                 placeholder="Grand Plaza Hotel"
-                placeholderTextColor="#7c839b"
+                placeholderTextColor={placeholderColor}
               />
             </Field>
             <Field label="Phone">
@@ -239,7 +243,7 @@ export function DemoRequestScreen() {
                 className={fieldClass}
                 style={fieldStyle}
                 placeholder="+385 91 234 5678"
-                placeholderTextColor="#7c839b"
+                placeholderTextColor={placeholderColor}
                 keyboardType="phone-pad"
               />
             </Field>
@@ -250,7 +254,7 @@ export function DemoRequestScreen() {
                 className={fieldClass}
                 style={fieldStyle}
                 placeholder="e.g. 120"
-                placeholderTextColor="#7c839b"
+                placeholderTextColor={placeholderColor}
                 keyboardType="numeric"
               />
             </Field>
@@ -261,7 +265,7 @@ export function DemoRequestScreen() {
                 className={fieldClass}
                 style={fieldStyle}
                 placeholder="e.g. 45"
-                placeholderTextColor="#7c839b"
+                placeholderTextColor={placeholderColor}
                 keyboardType="numeric"
               />
             </Field>
@@ -272,7 +276,7 @@ export function DemoRequestScreen() {
                 className={`${fieldClass} min-h-[120px]`}
                 style={fieldStyle}
                 placeholder="PMS, valet team size, timelines..."
-                placeholderTextColor="#7c839b"
+                placeholderTextColor={placeholderColor}
                 multiline
                 textAlignVertical="top"
               />
@@ -285,7 +289,7 @@ export function DemoRequestScreen() {
 
           {submitting ? (
             <View className="items-center py-4">
-              <ActivityIndicator color="#131b2e" />
+              <ActivityIndicator color="#D4AF37" />
             </View>
           ) : (
             <GoldButton label="Send request" shimmer onPress={() => void handleSubmit()} />
@@ -307,7 +311,7 @@ function Field({
 }) {
   return (
     <View className="gap-2">
-      <Text className="font-bodySemi text-sm text-primary">
+      <Text className="font-bodySemi text-sm text-white-pure">
         {label}
         {required ? <Text className="text-error"> *</Text> : null}
       </Text>

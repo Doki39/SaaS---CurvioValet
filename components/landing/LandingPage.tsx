@@ -19,9 +19,7 @@ import {
 import { getHeroImageSource } from "@/constants/heroImage";
 import {
   BrandMark,
-  HEADER_BAR_HEIGHT,
-  HEADER_BAR_PADDING_Y,
-  HEADER_BRAND_HEIGHT,
+  getHeaderMetrics,
 } from "@/components/ui/BrandMark";
 import { GoldButton } from "@/components/ui/GoldButton";
 import { OutlineButton } from "@/components/ui/OutlineButton";
@@ -50,6 +48,7 @@ const FEATURE_ICON: Record<string, keyof typeof MaterialIcons.glyphMap> = {
 export function LandingPage() {
   const { width } = useWindowDimensions();
   const isWide = width >= 900;
+  const header = getHeaderMetrics(width);
 
   useEffect(() => {
     if (!consumeScrollToPricingFlag()) return;
@@ -63,20 +62,26 @@ export function LandingPage() {
       <View
         className="absolute top-0 z-50 w-full border-b border-outline-variant/50 bg-primary-container/90"
         style={{
-          paddingTop: HEADER_BAR_PADDING_Y,
-          paddingBottom: HEADER_BAR_PADDING_Y,
+          paddingTop: header.paddingY,
+          paddingBottom: header.paddingY,
         }}
       >
         <View
           className="mx-auto w-full max-w-layout-shell flex-row items-center justify-between px-margin-mobile"
-          style={{ height: HEADER_BRAND_HEIGHT }}
+          style={{ height: header.brandHeight }}
         >
           <BrandMark align="start" size="header" onDark />
           <Pressable
             onPress={() => goToDemo()}
-            className="shrink-0 flex-row items-center justify-center rounded bg-gold-light px-4 py-2.5 active:opacity-90"
+            className={`shrink-0 flex-row items-center justify-center rounded bg-gold-light active:opacity-90 ${
+              isWide ? "px-4 py-2.5" : "px-3 py-1.5"
+            }`}
           >
-            <Text className="font-bodyMedium text-sm leading-none text-primary-container">
+            <Text
+              className={`font-bodyMedium leading-none text-primary-container ${
+                isWide ? "text-sm" : "text-xs"
+              }`}
+            >
               {REQUEST_DEMO_CTA}
             </Text>
           </Pressable>
@@ -99,7 +104,7 @@ export function LandingPage() {
               className={`relative z-10 items-center justify-center px-margin-mobile pb-section-gap text-center ${
                 isWide ? "min-h-[560px]" : "min-h-[480px]"
               }`}
-              style={{ paddingTop: HEADER_BAR_HEIGHT }}
+              style={{ paddingTop: header.barHeight }}
             >
               <Text className="mb-stack-md border-b border-gold-light pb-1 font-bodySemi text-xs uppercase tracking-widest text-gold-light">
                 {HERO.eyebrow}

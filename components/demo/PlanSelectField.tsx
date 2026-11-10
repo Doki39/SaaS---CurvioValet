@@ -33,13 +33,13 @@ export function PlanSelectField({ value, onChange, fieldClass, fieldStyle }: Pla
         className={`${fieldClass} flex-row items-center justify-between`}
         style={fieldStyle}
       >
-        <Text className="font-body text-base text-primary">
+        <Text className="font-body text-base text-white-pure">
           {paidPlan ? paidPlanLabel(paidPlan) : triggerLabel}
         </Text>
-        <MaterialIcons name={open ? "keyboard-arrow-up" : "keyboard-arrow-down"} size={22} color="#545f73" />
+        <MaterialIcons name={open ? "keyboard-arrow-up" : "keyboard-arrow-down"} size={22} color="#9aa3b8" />
       </Pressable>
       {open ? (
-        <View className="w-full overflow-hidden rounded border border-outline-variant/50 bg-white-pure">
+        <View className="w-full overflow-hidden rounded border border-outline-variant/50 bg-surface-container-high">
           <Pressable
             onPress={() => {
               onChange(FREE_DEMO_PLAN_ID);
@@ -49,7 +49,7 @@ export function PlanSelectField({ value, onChange, fieldClass, fieldStyle }: Pla
               value === FREE_DEMO_PLAN_ID ? "bg-surface-container-low" : ""
             }`}
           >
-            <Text className="font-bodySemi text-sm text-primary">Free demo</Text>
+            <Text className="font-bodySemi text-sm text-white-pure">Free demo</Text>
             <Text className="font-body text-xs text-secondary">Schedule a product walkthrough</Text>
           </Pressable>
           {PLANS.map((plan) => (
@@ -63,7 +63,7 @@ export function PlanSelectField({ value, onChange, fieldClass, fieldStyle }: Pla
                 value === plan.id ? "bg-surface-container-low" : ""
               }`}
             >
-              <Text className="font-bodySemi text-sm text-primary">{plan.name}</Text>
+              <Text className="font-bodySemi text-sm text-white-pure">{plan.name}</Text>
               <Text className="font-body text-xs text-secondary">
                 {plan.price}
                 {plan.period}

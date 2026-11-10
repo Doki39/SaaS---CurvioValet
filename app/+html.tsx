@@ -1,11 +1,11 @@
 import { ScrollViewStyleReset } from "expo-router/html";
 import { type PropsWithChildren } from "react";
 
-const SURFACE = "#f8f9fa";
+const SURFACE = "#131b2e";
 
 const rootStyle = `
   html {
-    color-scheme: light;
+    color-scheme: dark;
     background-color: ${SURFACE};
   }
   body,
