@@ -77,9 +77,8 @@ export const PROBLEMS_VIDEO = {
   poster: "/images/problems-video-poster.jpg",
   ariaLabel: "Why hotels move beyond paper valet logs",
   placeholderTitle: "Beyond the manual log",
-  placeholderCaption: "Product walkthrough — video loads when the file is on the server.",
   disclaimer:
-    "Video captured from the CurvioValet app, demonstrating real-time efficiency and check-in speed.",
+    "Video captured from the CurvioValet app, demonstrating real time efficiency and check-in speed.",
 };
 
 export const PROBLEMS_VIDEO_DRAFT = {
@@ -146,7 +145,7 @@ export const STEPS = [
   {
     n: "3",
     title: "Secure",
-    body: "Vehicle is safely parked with a timestamped digital record. Real-time location tracking for the team.",
+    body: "Vehicle is safely parked with a timestamped digital record. Real time location tracking for the team.",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuCFVa6u1mA9RTtc72Hr0-J-Wq7KYNSak8F9iCZJFMc3twZEU4zaMbaW0Wu3MpR2qoQkcRWXIKU8mwPYXdLuLojGIgAi758KvdXiaio4w6KLbpmGE8pWw8Fy7PzqNoa2BcOCwwOIliZmq1vBRkWa8Ff5ZuUqxdoBxLaTzE9eUCm_CIGWGtDTlZIBpltLXwhmn-t29YUoCoLw2h2CRJsbajlUhLrXUJxme64L1ozB3ul5m5-K8C49TGYf3qnlrCiFnUDSWcQXIhp_fdQ",
   },
@@ -168,7 +167,7 @@ export const FEATURES = [
   {
     icon: "inventory" as const,
     title: "Digital Vehicle Library",
-    body: "A searchable, real-time database of all cars currently on the property.",
+    body: "A searchable, real time database of all cars currently on the property.",
   },
   {
     icon: "visibility-off" as const,

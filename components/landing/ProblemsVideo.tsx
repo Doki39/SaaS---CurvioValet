@@ -3,9 +3,6 @@ import { ProblemsVideoPlaceholder } from "@/components/landing/ProblemsVideoPlac
 
 export function ProblemsVideo() {
   return (
-    <ProblemsVideoPlaceholder
-      title={PROBLEMS_VIDEO.placeholderTitle}
-      caption={PROBLEMS_VIDEO.placeholderCaption}
-    />
+    <ProblemsVideoPlaceholder title={PROBLEMS_VIDEO.placeholderTitle} />
   );
 }

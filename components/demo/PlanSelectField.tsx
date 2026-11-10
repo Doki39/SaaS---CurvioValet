@@ -17,7 +17,7 @@ type PlanSelectFieldProps = {
 
 function paidPlanLabel(plan: (typeof PLANS)[number]) {
   const period = plan.period ? ` ${plan.period}` : "";
-  return `${plan.name} — ${plan.price}${period}`;
+  return `${plan.name} ${plan.price}${period}`;
 }
 
 export function PlanSelectField({ value, onChange, fieldClass, fieldStyle }: PlanSelectFieldProps) {

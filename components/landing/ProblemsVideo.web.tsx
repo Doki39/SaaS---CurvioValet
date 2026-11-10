@@ -18,7 +18,7 @@ const videoStyle = {
 type LoadState = "checking" | "ready" | "missing";
 
 export function ProblemsVideo() {
-  const { enabled, src, poster, ariaLabel, placeholderTitle, placeholderCaption } = PROBLEMS_VIDEO;
+  const { enabled, src, poster, ariaLabel, placeholderTitle } = PROBLEMS_VIDEO;
   const [loadState, setLoadState] = useState<LoadState>(enabled ? "checking" : "missing");
   const [playbackFailed, setPlaybackFailed] = useState(false);
 
@@ -55,10 +55,7 @@ export function ProblemsVideo() {
 
   if (showPlaceholder) {
     return (
-      <ProblemsVideoPlaceholder
-        title={placeholderTitle}
-        caption={placeholderCaption}
-      />
+      <ProblemsVideoPlaceholder title={placeholderTitle} />
     );
   }
 
