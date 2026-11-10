@@ -20,7 +20,6 @@ import {
   PLANS,
   PROBLEMS,
   REQUEST_DEMO_CTA,
-  ROADMAP,
   STEPS,
   TAGLINE,
   WHY_POINTS,
@@ -274,54 +273,6 @@ export function LandingPage() {
                   )}
                 </View>
               ))}
-            </View>
-          </View>
-
-          <View className="px-margin-mobile py-section-gap">
-            <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Visionary Roadmap</Text>
-            <View className="mx-auto max-w-xs gap-stack-lg">
-              {ROADMAP.map((item, index) => (
-                <View key={item.title} className={`flex-row gap-4 ${item.done ? "" : "opacity-50"}`}>
-                  <View className="items-center">
-                    <View
-                      className={`h-2 w-2 rounded-full ${item.done ? "bg-gold-light" : "bg-outline-variant"}`}
-                    />
-                    {index < ROADMAP.length - 1 ? (
-                      <View className="mt-1 h-full w-0.5 bg-outline-variant/30" />
-                    ) : null}
-                  </View>
-                  <View className="pb-6">
-                    <Text className="font-bodySemi text-xs text-gold-light">{item.when}</Text>
-                    <Text className="font-bodySemi text-base text-white-pure">{item.title}</Text>
-                  </View>
-                </View>
-              ))}
-            </View>
-          </View>
-
-          <View className="bg-surface px-margin-mobile py-section-gap">
-            <Text className="mb-8 text-center font-bodySemi text-xs uppercase tracking-widest text-on-primary-container">
-              Trusted by industry leaders
-            </Text>
-            <View className="mb-stack-lg flex-row flex-wrap justify-center gap-8 opacity-40">
-              {["L'HOTEL", "PALACE", "GRAND", "RESORT"].map((name) => (
-                <Text key={name} className="font-display text-2xl text-white-pure">
-                  {name}
-                </Text>
-              ))}
-            </View>
-            <View className="rounded-xl border border-outline-variant/50 bg-surface-container p-8">
-              <Text className="mb-6 font-body italic text-base text-white-pure">
-                &quot;{BRAND} transformed our arrival experience. The visual integrity of our driveway is
-                preserved, and the team finally has complete clarity.&quot;
-              </Text>
-              <View className="flex-row items-center gap-4">
-                <View className="h-12 w-12 rounded-full bg-surface-container-high" />
-                <View>
-                  <Text className="font-bodySemi text-white-pure">Marcus Thorne</Text>
-                  <Text className="font-body text-xs text-on-primary-container">General Manager, Grand Plaza</Text>
-                </View>
-              </View>
             </View>
           </View>
 

@@ -175,7 +175,7 @@ export const AUDIENCES = [
   },
   {
     title: "Front Desk",
-    body: "Instantly see vehicle status and coordinate guest departures with one click.",
+    body: "Instantly see vehicle status and coordinate guest departures with ease.",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDJdq12n0VVtvsLWk9XlcK9cAzFe53J6Lh0ozfRjEErWZf0mfyCB2geT7nrU3sLc5H0aPuAv7PBLx_nN1YtTM7ZWq6SwdGkTULm9CU5fu2ZmV28n41VWFcQMNSWUTq3SVZDA8A9KO9ul6cUkbl5sAxU__LsTsLYRamWXVzBmnb5pBw7nWXG2F0D09eVoEPtu1lYv2_lHBBovhLbILHn5bTL0z7ha-ISOtotKyxhHp3PGqi61_bPK2m1j5f-04yL8yVULuBBqcXzbR4",
   },
@@ -225,12 +225,6 @@ export const PLANS = [
     popular: false,
     dark: true,
   },
-];
-
-export const ROADMAP = [
-  { when: "Shipped", title: "AI Photo Check-In", done: true },
-  { when: "In progress", title: "Multi-Property Analytics", done: true },
-  { when: "Planned", title: "Oracle OPERA Integration", done: false },
 ];
 
 export const FAQ = [
