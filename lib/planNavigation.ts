@@ -34,10 +34,14 @@ export function goToHome() {
   router.replace("/");
 }
 
-export function scrollToPricingSection() {
+export function scrollToSection(sectionId: string) {
   if (typeof document !== "undefined") {
-    document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
   }
+}
+
+export function scrollToPricingSection() {
+  scrollToSection("pricing");
 }
 
 export function goToHomePricing() {

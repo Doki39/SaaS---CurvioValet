@@ -3,15 +3,49 @@ export const APP_URL = "https://curviovalet.online";
 export const TAGLINE = "Hotel operation software";
 export const REQUEST_DEMO_CTA = "Request a free demo";
 
-export const FOOTER_PRODUCT_ITEMS = [
+export const FOOTER_PLATFORM_HIGHLIGHTS = [
   "Valet mobile app",
-  "Operations dashboard",
   "AI photo check-in",
   "Digital vehicle library",
   "Key photo evidence",
-  "Team task board",
-  "Check-in history & audit logs",
   "PMS integration",
+] as const;
+
+export const FOOTER_APP_STORE = {
+  appStoreUrl: "",
+  playStoreUrl: "",
+} as const;
+
+export type FooterNavAction = "capabilities" | "pricing" | "faq" | "demo";
+
+export type FooterNavLink =
+  | { label: string; action: FooterNavAction }
+  | { label: string; href: string };
+
+export const FOOTER_NAV_COLUMNS: {
+  title: string;
+  links?: FooterNavLink[];
+  highlights?: readonly string[];
+}[] = [
+  {
+    title: "Product",
+    links: [
+      { label: "Platform capabilities", action: "capabilities" },
+      { label: "Pricing", action: "pricing" },
+      { label: "FAQ", action: "faq" },
+    ],
+  },
+  {
+    title: "Platform",
+    highlights: FOOTER_PLATFORM_HIGHLIGHTS,
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "Request a free demo", action: "demo" },
+      { label: "Product sign-in", href: APP_URL },
+    ],
+  },
 ];
 
 export const HERO = {

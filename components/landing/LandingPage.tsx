@@ -8,7 +8,6 @@ import {
   BRAND,
   FAQ,
   FEATURES,
-  FOOTER_PRODUCT_ITEMS,
   HERO,
   PROBLEMS,
   REQUEST_DEMO_CTA,
@@ -30,6 +29,7 @@ import { FaqItem } from "@/components/landing/FaqItem";
 import { FeatureCapabilityCard } from "@/components/landing/FeatureCapabilityCard";
 import { ProblemsVideo } from "@/components/landing/ProblemsVideo";
 import { PlanCards } from "@/components/pricing/PlanCards";
+import { SiteFooter } from "@/components/landing/SiteFooter";
 import {
   consumeScrollToPricingFlag,
   goToDemo,
@@ -179,7 +179,7 @@ export function LandingPage() {
             </View>
           </View>
 
-          <View className="bg-surface-container px-margin-mobile py-section-gap">
+          <View nativeID="capabilities" className="bg-surface-container px-margin-mobile py-section-gap">
             <Text className="mb-stack-lg font-displaySemi text-2xl text-white-pure">Platform Capabilities</Text>
             <View className={`gap-4 ${isWide ? "flex-row flex-wrap" : ""}`}>
               {FEATURES.map((f) => (
@@ -229,7 +229,7 @@ export function LandingPage() {
             <PlanCards onSelectPlan={goToDemo} variant="onDark" />
           </View>
 
-          <View className="px-margin-mobile py-section-gap">
+          <View nativeID="faq" className="px-margin-mobile py-section-gap">
             <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Common Questions</Text>
             <View className="gap-4">
               {FAQ.map((item) => (
@@ -248,35 +248,7 @@ export function LandingPage() {
             </View>
           </View>
 
-          <View className="w-full border-t border-on-primary-fixed-variant/50 bg-primary-container py-stack-lg">
-            <View className="mx-auto w-full max-w-[1280px] gap-8 px-margin-mobile">
-              <View className="flex-row gap-8">
-                <View className="flex-1 gap-4">
-                  <Text className="font-bodySemi text-xs uppercase tracking-widest text-on-primary-container">
-                    Platform
-                  </Text>
-                  <Pressable onPress={scrollToPricingSection}>
-                    <Text className="font-body text-sm text-on-primary-container underline">Pricing</Text>
-                  </Pressable>
-                </View>
-                <View className="flex-1 gap-4">
-                  <Text className="font-bodySemi text-xs uppercase tracking-widest text-on-primary-container">
-                    Product
-                  </Text>
-                  {FOOTER_PRODUCT_ITEMS.map((item) => (
-                    <Text key={item} className="font-body text-sm text-on-primary-container">
-                      {item}
-                    </Text>
-                  ))}
-                </View>
-              </View>
-              <View className="border-t border-on-primary-fixed-variant/30 pt-8">
-                <Text className="font-body text-sm text-on-primary-container">
-                  Copyright {new Date().getFullYear()} {BRAND}. {TAGLINE}.
-                </Text>
-              </View>
-            </View>
-          </View>
+          <SiteFooter isWide={isWide} />
         </View>
       </ScrollView>
     </View>
