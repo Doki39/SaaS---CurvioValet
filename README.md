@@ -26,8 +26,7 @@ Output is in `dist/`.
 | `app/` | Expo Router entry |
 | `components/landing/` | Landing page sections |
 | `constants/landingContent.ts` | Copy, pricing, FAQ (edit here first) |
-| `public/images/hero.jpg` | Hero image for **web** — served as-is (no Metro compression). Replace with your export; PNG OK for lossless |
-| `assets/hero.jpg` | Same hero for native builds (keep in sync) |
+| `assets/hero.jpg` | Hero image (web + native) |
 | `global.css` | Tailwind + shimmer utilities |
 
 ## Links
