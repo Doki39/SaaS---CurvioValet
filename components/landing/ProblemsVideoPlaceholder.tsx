@@ -18,7 +18,7 @@ export function ProblemsVideoDisclaimer() {
 export function ProblemsVideoPlaceholder({ title, caption }: ProblemsVideoPlaceholderProps) {
   return (
     <View className="w-full gap-2">
-      <View className="aspect-video w-full items-center justify-center gap-3 rounded-xl border border-gold-light/40 bg-primary-container px-6">
+      <View className="min-h-[12rem] w-full items-center justify-center gap-3 rounded-xl border border-gold-light/40 bg-primary-container px-6 py-12">
         <View className="h-14 w-14 items-center justify-center rounded-full border-2 border-gold-light/60 bg-primary-container">
           <MaterialIcons name="play-arrow" size={36} color="#D4AF37" />
         </View>

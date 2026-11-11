@@ -77,6 +77,9 @@ export const PROBLEMS_VIDEO = {
   poster: "/images/problems-video-poster.jpg",
   ariaLabel: "Why hotels move beyond paper valet logs",
   placeholderTitle: "Beyond the manual log",
+  previewTitle: "Beyond the manual log",
+  previewSubtitle: "Tap to watch the product walkthrough",
+  muted: true,
   disclaimer:
     "Video captured from the CurvioValet app, demonstrating real time efficiency and check-in speed.",
 };
