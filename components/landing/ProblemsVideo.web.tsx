@@ -71,6 +71,15 @@ export function ProblemsVideo() {
     void el.play();
   };
 
+  const handleEnded = () => {
+    const el = videoRef.current;
+    if (el) {
+      el.pause();
+      el.currentTime = 0;
+    }
+    setHasPlayed(false);
+  };
+
   const showPlaceholder = !enabled || loadState === "missing" || playbackFailed;
 
   if (loadState === "checking" && enabled) {
@@ -104,6 +113,7 @@ export function ProblemsVideo() {
             style={videoStyle}
             onLoadedMetadata={handleMetadata}
             onPlay={() => setHasPlayed(true)}
+            onEnded={handleEnded}
             onError={() => setPlaybackFailed(true)}
           />
           {!hasPlayed ? (
