@@ -43,3 +43,4 @@ Thumbs.db
 *.swo
 .idea/
 .vscode/
+/public/videos 
