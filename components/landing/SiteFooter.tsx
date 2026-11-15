@@ -7,7 +7,8 @@ import {
   TAGLINE,
   type FooterNavLink,
 } from "@/constants/landingContent";
-import { goToDemo, scrollToSection } from "@/lib/planNavigation";
+import { goToDemo } from "@/lib/planNavigation";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 type SiteFooterProps = {
   isWide: boolean;

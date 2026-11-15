@@ -1,6 +1,5 @@
 import { router } from "expo-router";
 import { PLANS } from "@/constants/landingContent";
-import { scrollToSection } from "@/lib/scrollToSection";
 
 export const FREE_DEMO_PLAN_ID = "free-demo";
 
@@ -29,28 +28,6 @@ export function goToDemo(planId?: PlanId) {
   router.push({ pathname: "/demo", params: { plan: selected } });
 }
 
-const SCROLL_PRICING_KEY = "curviovalet-scroll-pricing";
-
 export function goToHome() {
   router.replace("/");
-}
-
-export { scrollToSection };
-
-export function scrollToPricingSection() {
-  scrollToSection("pricing");
-}
-
-export function goToHomePricing() {
-  if (typeof sessionStorage !== "undefined") {
-    sessionStorage.setItem(SCROLL_PRICING_KEY, "1");
-  }
-  router.replace("/");
-}
-
-export function consumeScrollToPricingFlag(): boolean {
-  if (typeof sessionStorage === "undefined") return false;
-  if (sessionStorage.getItem(SCROLL_PRICING_KEY) !== "1") return false;
-  sessionStorage.removeItem(SCROLL_PRICING_KEY);
-  return true;
 }

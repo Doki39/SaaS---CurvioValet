@@ -1,5 +1,13 @@
-import { useEffect } from "react";
-import { Platform, Pressable, ScrollView, Text, View, useWindowDimensions } from "react-native";
+import { useCallback, useEffect, useRef } from "react";
+import {
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+  useWindowDimensions,
+  type LayoutChangeEvent,
+} from "react-native";
 import { Image } from "expo-image";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
@@ -28,11 +36,8 @@ import { FeatureCapabilityCard } from "@/components/landing/FeatureCapabilityCar
 import { ProblemsVideo } from "@/components/landing/ProblemsVideo";
 import { PlanCards } from "@/components/pricing/PlanCards";
 import { SiteFooter } from "@/components/landing/SiteFooter";
-import {
-  consumeScrollToPricingFlag,
-  goToDemo,
-  scrollToPricingSection,
-} from "@/lib/planNavigation";
+import { goToDemo } from "@/lib/planNavigation";
+import { scrollToLandingTop, scrollToSection, setLandingScrollBridge } from "@/lib/scrollToSection";
 
 const FEATURE_ICON: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   "photo-camera": "photo-camera",
@@ -45,16 +50,34 @@ const FEATURE_ICON: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   domain: "domain",
 };
 
+const PHONE_SCROLL_INSET_SECTIONS = new Set(["capabilities", "pricing"]);
+
 export function LandingPage() {
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const isWide = width >= 900;
   const header = getHeaderMetrics(width);
+  const scrollRef = useRef<ScrollView>(null);
+  const sectionY = useRef<Record<string, number>>({});
+
+  const onSectionLayout = useCallback(
+    (id: string) => (event: LayoutChangeEvent) => {
+      sectionY.current[id] = event.nativeEvent.layout.y;
+    },
+    []
+  );
 
   useEffect(() => {
-    if (!consumeScrollToPricingFlag()) return;
-    const t = setTimeout(() => scrollToPricingSection(), 150);
-    return () => clearTimeout(t);
-  }, []);
+    setLandingScrollBridge({
+      getScrollView: () => scrollRef.current,
+      getSectionY: (id: string) => sectionY.current[id],
+      getHeaderOffset: () => header.barHeight,
+      getScrollInset: (id: string) => {
+        if (isWide || !PHONE_SCROLL_INSET_SECTIONS.has(id)) return 0;
+        return Math.round(height * 0.5);
+      },
+    });
+    return () => setLandingScrollBridge(null);
+  }, [header.barHeight, height, isWide]);
 
   return (
     <View className="flex-1 bg-surface">
@@ -70,7 +93,14 @@ export function LandingPage() {
           className="mx-auto w-full max-w-layout-shell flex-row items-center justify-between px-margin-mobile"
           style={{ height: header.brandHeight }}
         >
-          <BrandMark align="start" size="header" onDark />
+          <Pressable
+            onPress={scrollToLandingTop}
+            accessibilityRole="button"
+            accessibilityLabel="Back to top"
+            className="shrink-0 active:opacity-90"
+          >
+            <BrandMark align="start" size="header" onDark />
+          </Pressable>
           <Pressable
             onPress={() => goToDemo()}
             className={`shrink-0 flex-row items-center justify-center rounded bg-gold-light active:opacity-90 ${
@@ -88,8 +118,13 @@ export function LandingPage() {
         </View>
       </View>
 
-      <ScrollView className="flex-1" contentContainerClassName="pb-stack-lg" showsVerticalScrollIndicator={false}>
-        <View>
+      <ScrollView
+        ref={scrollRef}
+        className="landing-main-scroll flex-1"
+        contentContainerClassName="pb-stack-lg"
+        showsVerticalScrollIndicator={false}
+      >
+        <View collapsable={false}>
           <View className="relative w-full overflow-hidden">
             <Image
               source={getHeroImageSource()}
@@ -104,11 +139,17 @@ export function LandingPage() {
               className={`relative z-10 items-center justify-center px-margin-mobile pb-section-gap text-center ${
                 isWide ? "min-h-[560px]" : "min-h-[480px]"
               }`}
-              style={{ paddingTop: header.barHeight }}
+              style={{ paddingTop: header.barHeight + (isWide ? 0 : 28) }}
             >
-              <Text className="mb-stack-md border-b border-gold-light pb-1 font-bodySemi text-xs uppercase tracking-widest text-gold-light">
-                {HERO.eyebrow}
-              </Text>
+              <View className={`mb-stack-md w-full items-center ${isWide ? "" : "px-2"}`}>
+                <Text
+                  className={`border-b border-gold-light pb-1 text-center font-bodySemi text-xs uppercase text-gold-light ${
+                    isWide ? "tracking-widest" : "max-w-[18rem] leading-5 tracking-wide"
+                  }`}
+                >
+                  {HERO.eyebrow}
+                </Text>
+              </View>
               <Text className="mb-stack-md text-center font-display text-4xl leading-tight text-white-pure">
                 {HERO.title}
               </Text>
@@ -120,7 +161,7 @@ export function LandingPage() {
                   <GoldButton label={REQUEST_DEMO_CTA} shimmer onPress={() => goToDemo()} />
                 </View>
                 <View className={isWide ? "flex-1" : "w-full"}>
-                  <OutlineButton label="View Pricing" onPress={scrollToPricingSection} />
+                  <OutlineButton label="View Pricing" onPress={() => scrollToSection("pricing")} />
                 </View>
               </View>
             </View>
@@ -185,9 +226,10 @@ export function LandingPage() {
           </View>
 
           <View
+            onLayout={onSectionLayout("capabilities")}
             nativeID="capabilities"
             {...(Platform.OS === "web" ? { id: "capabilities" } : {})}
-            className="bg-surface-container px-margin-mobile py-section-gap"
+            className="scroll-mt-28 bg-surface-container px-margin-mobile py-section-gap"
           >
             <Text className="mb-stack-lg font-displaySemi text-2xl text-white-pure">Platform Capabilities</Text>
             <View className={`gap-4 ${isWide ? "flex-row flex-wrap" : ""}`}>
@@ -234,18 +276,20 @@ export function LandingPage() {
           </View>
 
           <View
+            onLayout={onSectionLayout("pricing")}
             nativeID="pricing"
             {...(Platform.OS === "web" ? { id: "pricing" } : {})}
-            className="bg-surface-container-high px-margin-mobile py-section-gap"
+            className="scroll-mt-28 bg-surface-container-high px-margin-mobile py-section-gap"
           >
             <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Investment Plans</Text>
             <PlanCards onSelectPlan={goToDemo} variant="onDark" />
           </View>
 
           <View
+            onLayout={onSectionLayout("faq")}
             nativeID="faq"
             {...(Platform.OS === "web" ? { id: "faq" } : {})}
-            className="px-margin-mobile py-section-gap"
+            className="scroll-mt-28 px-margin-mobile py-section-gap"
           >
             <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Common Questions</Text>
             <View className="gap-4">
