@@ -1,0 +1,1 @@
+export function scrollToSection(_sectionId: string) {}

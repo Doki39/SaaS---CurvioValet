@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Pressable, ScrollView, Text, View, useWindowDimensions } from "react-native";
+import { Platform, Pressable, ScrollView, Text, View, useWindowDimensions } from "react-native";
 import { Image } from "expo-image";
 import { MaterialIcons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
@@ -60,7 +60,7 @@ export function LandingPage() {
     <View className="flex-1 bg-surface">
       <StatusBar style="light" />
       <View
-        className="absolute top-0 z-50 w-full border-b border-outline-variant/50 bg-primary-container/90"
+        className="landing-sticky-header absolute top-0 z-50 w-full border-b border-outline-variant/50 bg-primary-container/90"
         style={{
           paddingTop: header.paddingY,
           paddingBottom: header.paddingY,
@@ -184,7 +184,11 @@ export function LandingPage() {
             </View>
           </View>
 
-          <View nativeID="capabilities" className="bg-surface-container px-margin-mobile py-section-gap">
+          <View
+            nativeID="capabilities"
+            {...(Platform.OS === "web" ? { id: "capabilities" } : {})}
+            className="bg-surface-container px-margin-mobile py-section-gap"
+          >
             <Text className="mb-stack-lg font-displaySemi text-2xl text-white-pure">Platform Capabilities</Text>
             <View className={`gap-4 ${isWide ? "flex-row flex-wrap" : ""}`}>
               {FEATURES.map((f) => (
@@ -229,12 +233,20 @@ export function LandingPage() {
             </View>
           </View>
 
-          <View nativeID="pricing" className="bg-surface-container-high px-margin-mobile py-section-gap">
+          <View
+            nativeID="pricing"
+            {...(Platform.OS === "web" ? { id: "pricing" } : {})}
+            className="bg-surface-container-high px-margin-mobile py-section-gap"
+          >
             <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Investment Plans</Text>
             <PlanCards onSelectPlan={goToDemo} variant="onDark" />
           </View>
 
-          <View nativeID="faq" className="px-margin-mobile py-section-gap">
+          <View
+            nativeID="faq"
+            {...(Platform.OS === "web" ? { id: "faq" } : {})}
+            className="px-margin-mobile py-section-gap"
+          >
             <Text className="mb-stack-lg text-center font-displaySemi text-2xl text-white-pure">Common Questions</Text>
             <View className="gap-4">
               {FAQ.map((item) => (

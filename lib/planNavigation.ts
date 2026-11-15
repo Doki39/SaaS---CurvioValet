@@ -1,5 +1,6 @@
 import { router } from "expo-router";
 import { PLANS } from "@/constants/landingContent";
+import { scrollToSection } from "@/lib/scrollToSection";
 
 export const FREE_DEMO_PLAN_ID = "free-demo";
 
@@ -34,11 +35,7 @@ export function goToHome() {
   router.replace("/");
 }
 
-export function scrollToSection(sectionId: string) {
-  if (typeof document !== "undefined") {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
-  }
-}
+export { scrollToSection };
 
 export function scrollToPricingSection() {
   scrollToSection("pricing");
